@@ -9,6 +9,65 @@ export default [
       text: 'NEW',
     }
   },
+  
+  /*Product menu*/
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Product']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'New Products',
+    to: '/products/new',
+    icon: 'cil-puzzle',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Product List',
+    to: '/products',
+    icon: 'cil-grid',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Categories',
+    to: '/categories',
+    icon: 'cil-calculator',
+  },
+  /*Vendor menu*/
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Vendor & Buyer']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'New Vendors',
+    to: '/vendors/new',
+    icon: 'cil-puzzle',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Vendor List',
+    to: '/vendors',
+    icon: 'cil-grid',
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Buyer List',
+    to: '/buyers',
+    icon: 'cil-calculator',
+  },
+  /*Report menu*/
+  {
+    _tag: 'CSidebarNavTitle',
+    _children: ['Report']
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Sales Report',
+    to: '/reports',
+    icon: 'cil-chart-pie',
+  },
+  /****************** Old Menu**********************/
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

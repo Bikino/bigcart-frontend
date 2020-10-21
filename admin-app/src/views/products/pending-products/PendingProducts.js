@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 
 import * as actions from '../../../store/actions'
-import NewProductTable from './NewProductTable'
+import NewProductTable from './PendingProductTable'
 
 const NewProducts = (props) => {
 
@@ -14,7 +14,7 @@ const NewProducts = (props) => {
 
     useEffect(() => {
         dispatch(actions.getNewProducts())
-    }, [])
+    }, [dispatch])
 
     let productTable = null
     if (!isLoading && !err && products.length > 0) {
@@ -27,7 +27,7 @@ const NewProducts = (props) => {
                 <CCol xl='12' md='12'>
                     <CCard>
                         <CCardHeader>
-                            New products
+                            <h5>Pending products</h5>
                         </CCardHeader>
                         <CCardBody>
                             {productTable}

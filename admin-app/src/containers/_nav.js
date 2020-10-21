@@ -17,8 +17,8 @@ export default [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: 'New Products',
-    to: '/products/new',
+    name: 'Pending Products',
+    to: '/products/pending',
     icon: 'cil-puzzle',
   },
   {

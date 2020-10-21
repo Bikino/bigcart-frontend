@@ -29,7 +29,7 @@ const Login = () => {
   const [passwordErrorData, setpasswordErrorData] = useState({ hasError: false, message: '' })
 
   const [formValid, setFormValid] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  //const [submitted, setSubmitted] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -38,7 +38,7 @@ const Login = () => {
     if (!formValid)
       return
 
-    setSubmitted(true)
+    //setSubmitted(true)
     dispatch(actions.getToken(username, password))
   }
 

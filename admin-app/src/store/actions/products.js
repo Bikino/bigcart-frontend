@@ -20,8 +20,15 @@ export const getNewProducts = () => {
     return async dispatch => {
         dispatch(getNewProductsStart())
         try {
-            const { data } = await getNewProductsSvc()
-            dispatch(getNewProductsSuccess(data))
+            const response = await getNewProductsSvc()
+            const products = []
+            for (let key in response.data) {
+                products.push({
+                    ...response.data[key],
+                    id: key
+                })
+            }
+            dispatch(getNewProductsSuccess(products))
         }
         catch (err) {
             dispatch(getNewProductsFail(new Error('error occured')))

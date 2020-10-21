@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import { USER_LOGGED_OUT } from '../actions/actionTypes'
 import token from './token'
 import sidebarShow from './sidebarShow'
+import productReducer from './products'
 
 const tokenPersistConfig = {
     key: 'token',
@@ -15,6 +16,7 @@ const tokenPersistConfig = {
 const appReducer = combineReducers({
     token: persistReducer(tokenPersistConfig, token),
     sidebarShow,
+    productReducer,
 })
 
 const rootReducer = (state, action) => {

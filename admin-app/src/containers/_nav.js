@@ -9,7 +9,7 @@ export default [
       text: 'NEW',
     }
   },
-  
+
   /*Product menu*/
   {
     _tag: 'CSidebarNavTitle',
@@ -67,7 +67,7 @@ export default [
     to: '/reports',
     icon: 'cil-chart-pie',
   },
-  /****************** Old Menu**********************/
+  // /****************** Old Menu**********************/
   {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

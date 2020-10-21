@@ -1,0 +1,5 @@
+export const TOKEN_GET_START = 'TOKEN_GET_START'
+export const TOKEN_GET_SUCCESS = 'TOKEN_GET_SUCCESS'
+export const TOKEN_GET_FAIL = 'TOKEN_GET_FAIL'
+
+export const USER_LOGGED_OUT = 'USER_LOGGED_OUT'

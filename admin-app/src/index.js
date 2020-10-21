@@ -3,19 +3,24 @@ import 'react-app-polyfill/stable';
 import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { icons } from './assets/icons'
 
 import { Provider } from 'react-redux'
-import store from './store/store'
+//import store from './store/store'
+import { persistor, store } from './store'
 
 React.icons = icons
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

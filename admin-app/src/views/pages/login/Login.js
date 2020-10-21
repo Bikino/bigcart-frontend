@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import { useDispatch } from 'react-redux'
 import {
   CButton,
   CCard,
@@ -16,6 +16,8 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
+import * as actions from '../../../store/actions'
+
 const Login = () => {
 
   const [username, setUsername] = useState('')
@@ -29,13 +31,15 @@ const Login = () => {
   const [formValid, setFormValid] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
+  const dispatch = useDispatch()
+
   const handleSubmit = (evt) => {
     evt.preventDefault()
     if (!formValid)
       return
 
     setSubmitted(true)
-
+    dispatch(actions.getToken(username, password))
   }
 
   const handleChange = (e) => {

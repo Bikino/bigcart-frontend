@@ -22,8 +22,9 @@ export const getToken = (username, password) => {
     return async dispatch => {
         dispatch(getTokenStart)
         try {
-            let { idToken, expiresIn } = await authSvc(username, password)
-            dispatch(getTokenSuccess(idToken, expiresIn))
+            let response = await authSvc(username, password)
+            let { idToken, expiresIn } = response.data
+            dispatch(getTokenSuccess(idToken, expiresIn))            
             saveToken(idToken)
             history.push('/')
 

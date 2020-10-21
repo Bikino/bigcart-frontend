@@ -1,6 +1,5 @@
-export const saveToken = (token, refreshToken) => {
+export const saveToken = (token) => {
     localStorage.setItem('token', token)
-    localStorage.setItem('refresh-token', refreshToken)
 }
 
 export const getToken = () => {
@@ -9,12 +8,6 @@ export const getToken = () => {
     return token
 }
 
-export const getRefreshToken = () => {
-    const token = localStorage.getItem('refresh-token')
-    return token
-}
-
 export const clearToken = () => {
     localStorage.removeItem('token')
-    localStorage.removeItem('refresh-token')
 }

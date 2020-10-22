@@ -7,17 +7,17 @@ const initialState = {
     total: 0
 }
 
-const newProducts = (state = initialState, action) => {
+const products = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.PRODUCTS_GET_NEW_LIST_START:
+        case actionTypes.PRODUCTS_GET_LIST_START:
             return { ...state, isLoading: true }
-        case actionTypes.PRODUCTS_GET_NEW_LIST_SUCCESS:
+        case actionTypes.PRODUCTS_GET_LIST_SUCCESS:
             return { ...state, isLoading: false, data: action.products, err: null }
-        case actionTypes.PRODUCTS_GET_NEW_LIST_FAIL:
+        case actionTypes.PRODUCTS_GET_LIST_FAIL:
             return { ...state, isLoading: false, err: action.err }
         default:
             return state
     }
 }
 
-export default newProducts
+export default products

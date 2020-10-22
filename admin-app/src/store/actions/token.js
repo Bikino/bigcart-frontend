@@ -24,7 +24,7 @@ export const getToken = (username, password) => {
         try {
             let response = await authSvc(username, password)
             let { idToken, expiresIn } = response.data
-            dispatch(getTokenSuccess(idToken, expiresIn))            
+            dispatch(getTokenSuccess(idToken, expiresIn))
             saveToken(idToken)
             history.push('/')
 
@@ -34,6 +34,10 @@ export const getToken = (username, password) => {
         }
     }
 }
+
+export const userLogout = () => ({
+    type: actionTypes.USER_LOGGED_OUT
+})
 
 // const fakeLogin = (username, password) => {
 //     return new Promise((resolve) => setTimeout(() => {

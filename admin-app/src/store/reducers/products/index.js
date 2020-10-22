@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import newProducts from './newProducts'
+import pendingProducts from './pendingProducts'
+import products from './products'
 
 const productReducer = combineReducers({
-    newProducts
+    pendingProducts,
+    products,
 })
 
 export default productReducer

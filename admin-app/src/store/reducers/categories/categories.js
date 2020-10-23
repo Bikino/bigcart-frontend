@@ -15,9 +15,26 @@ const categories = (state = initialState, action) => {
             return { ...state, isLoading: false, data: action.categories, err: null }
         case actionTypes.CATEGORIES_GET_LIST_FAIL:
             return { ...state, isLoading: false, err: action.err }
+        /* category created*/
+        case actionTypes.CATEGORIES_CREATE_SUCCESS:
+            return { ...state, data: [...state.data, action.category] }
+        /* sub category created*/
+        case actionTypes.CATEGORIES_CREATE_SUB_SUCCESS:
+            return subCategoryCreate(state, action)
         default:
             return state
     }
+}
+
+const subCategoryCreate = (state, action) => {
+    const newData = [...state.data]
+    const parentCategory = newData.find(c => c.id === action.category.parentId)
+    if (!parentCategory.children)
+        parentCategory.children = []
+
+    parentCategory.children.push(action.category)
+
+    return { ...state, data: newData }
 }
 
 export default categories

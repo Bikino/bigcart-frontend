@@ -26,7 +26,7 @@ const ProductDetail = (props) => {
                         </CCardHeader>
                         <CCardBody>
                             <div>
-                                <h5>{data.name}</h5>
+                                <h5>{data.name} - {data.vendor}</h5>
                                 <img style={{ width: '100px' }} src={data.img} alt='' />
                                 <h6 className='text-success'>Price: ${data.price}</h6>
                                 <p className='text-primary'>{data.description}</p>

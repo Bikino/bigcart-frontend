@@ -26,7 +26,7 @@ const ProductList = (props) => {
                 <CCol xl='12' md='12'>
                     <CCard>
                         <CCardHeader>
-                            <h5>Pending products</h5>
+                            <h5>Product List</h5>
                         </CCardHeader>
                         <CCardBody>
                             {productTable}

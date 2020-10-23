@@ -113,3 +113,31 @@ export const createSubCategory = (cateName, parentId) => {
         }
     }
 }
+
+const renameCategoryStart = () => ({
+    type: actionTypes.CATEGORIES_RENAME_START
+})
+
+const renameCategoryFail = (err) => ({
+    type: actionTypes.CATEGORIES_RENAME_FAIL,
+    err,
+})
+
+const renameCategorySuccess = (category) => ({
+    type: actionTypes.CATEGORIES_RENAME_SUCCESS,
+    category
+})
+
+export const renameCategory = (newName, category) => {
+    return async dispatch => {
+        dispatch(renameCategoryStart())
+        try {
+            const response = await categorySvc.renameCategory(newName, category)
+            const { data } = response
+            dispatch(renameCategorySuccess(data))
+        }
+        catch (err) {
+            dispatch(renameCategoryFail(new Error('error occured')))
+        }
+    }
+}

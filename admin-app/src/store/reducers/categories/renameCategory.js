@@ -6,17 +6,17 @@ const initialState = {
     data: {}
 }
 
-const createCategories = (state = initialState, action) => {
+const renameCategories = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.CATEGORIES_CREATE_START:
+        case actionTypes.CATEGORIES_RENAME_START:
             return { ...state, isProcessing: true }
-        case actionTypes.CATEGORIES_CREATE_SUCCESS:
-            return { ...state, isProcessing: false, data: action.category, err: null }
-        case actionTypes.CATEGORIES_CREATE_FAIL:
+        case actionTypes.CATEGORIES_RENAME_SUCCESS:
+            return { ...state, isProcessing: false, newName: action.category, err: null }
+        case actionTypes.CATEGORIES_RENAME_FAIL:
             return { ...state, isProcessing: false, err: action.err }
         default:
             return state
     }
 }
 
-export default createCategories
+export default renameCategories

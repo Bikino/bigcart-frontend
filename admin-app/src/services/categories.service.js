@@ -18,6 +18,11 @@ export const createSubCategory = async (cateName, parentId) => {
     return response
 }
 
+export const renameCategory = async (newName, category) => {
+    const response = await fakeRenameCate(newName, category)
+    return response
+}
+
 const fakeCreateCate = (cateName) => {
     return new Promise((resolve) => setTimeout(() => {
         resolve({ data: { id: uuidv4(), name: cateName, parent: '' } })
@@ -27,6 +32,12 @@ const fakeCreateCate = (cateName) => {
 const fakeCreateSubCate = (cateName, parentId) => {
     return new Promise((resolve) => setTimeout(() => {
         resolve({ data: { id: uuidv4(), name: cateName, parentId } })
+    }, 1000))
+}
+
+const fakeRenameCate = (newName, category) => {
+    return new Promise((resolve) => setTimeout(() => {
+        resolve({ data: { id: category.cateId, name: newName, parentId: category.parentId } })
     }, 1000))
 }
 

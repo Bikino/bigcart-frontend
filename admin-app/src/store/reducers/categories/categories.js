@@ -21,6 +21,9 @@ const categories = (state = initialState, action) => {
         /* sub category created*/
         case actionTypes.CATEGORIES_CREATE_SUB_SUCCESS:
             return subCategoryCreate(state, action)
+        /* category renamed*/
+        case actionTypes.CATEGORIES_RENAME_SUCCESS:
+            return categoryRename(state, action)
         default:
             return state
     }
@@ -34,6 +37,20 @@ const subCategoryCreate = (state, action) => {
 
     parentCategory.children.push(action.category)
 
+    return { ...state, data: newData }
+}
+
+const categoryRename = (state, action) => {
+    console.log(action)
+    const newData = [...state.data]
+    if (action.category.parentId) {
+        const parent = newData.find(c => c.id === action.category.parentId)
+        const cate = parent.children.find(c => c.id === action.category.id)
+        cate.name = action.category.name
+    } else {
+        const cate = newData.find(c => c.id === action.category.id)
+        cate.name = action.category.name
+    }
     return { ...state, data: newData }
 }
 

@@ -70,3 +70,36 @@ export const getProductList = () => {
         }
     }
 }
+
+
+const getProductDetailStart = () => ({
+    type: actionTypes.PRODUCTS_GET_DETAIL_START
+})
+
+
+const getProductDetailFail = (err) => ({
+    type: actionTypes.PRODUCTS_GET_DETAIL_FAIL,
+    err
+})
+
+const getProductDetailSuccess = (product) => ({
+    type: actionTypes.PRODUCTS_GET_DETAIL_SUCCESS,
+    product
+})
+
+export const getProductDetail = (id) => {
+    return async dispatch => {
+        dispatch(getProductDetailStart())
+        try {
+            const response = await productSvc.getProductDetail(id)
+            const { data } = response
+            let product = null
+            //mock
+            product = data[id]
+            dispatch(getProductDetailSuccess(product))
+        }
+        catch (err) {
+            dispatch(getProductDetailFail(new Error('error occured')))
+        }
+    }
+}

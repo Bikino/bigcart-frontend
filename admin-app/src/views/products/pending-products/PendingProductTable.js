@@ -1,7 +1,14 @@
 import React from 'react'
 import { CButton } from '@coreui/react'
 
+import history from '../../../helper/history'
+
 const PendingProductTable = (props) => {
+
+    const detailClick = (productId) => {
+        history.push(`/products/${productId}`)
+    }
+
     return (
         <table className='table'>
             <thead>
@@ -24,7 +31,7 @@ const PendingProductTable = (props) => {
                             <td>${p.price}</td>
                             <td>10/21/2020</td>
                             <td>
-                                <CButton size='sm' block color="info">Detail</CButton>  
+                                <CButton size='sm' block color="info" onClick={() => { detailClick(p.id) }}>Detail</CButton>
                             </td>
                             <td>
                                 <CButton size='sm' block color="success">Approve</CButton>

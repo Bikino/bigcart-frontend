@@ -14,3 +14,10 @@ export const getProducts = async () => {
     const response = await axios.get(url)
     return response
 }
+
+export const getProductDetail = async (id) => {
+    let token = getToken()
+    let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
+    const response = await axios.get(url)
+    return response
+}

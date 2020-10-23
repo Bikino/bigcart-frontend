@@ -6,6 +6,7 @@ import { USER_LOGGED_OUT } from '../actions/actionTypes'
 import token from './token'
 import sidebarShow from './sidebarShow'
 import productReducer from './products'
+import categoryReducer from './categories'
 
 const tokenPersistConfig = {
     key: 'token',
@@ -17,6 +18,7 @@ const appReducer = combineReducers({
     token: persistReducer(tokenPersistConfig, token),
     sidebarShow,
     productReducer,
+    categoryReducer,
 })
 
 const rootReducer = (state, action) => {

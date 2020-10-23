@@ -10,6 +10,12 @@ const CategoryList = () => {
     const [modal, setModal] = useState(false)
     const [modalTitle, setModalTitle] = useState('')
     const [cateName, setcateName] = useState('')
+
+    const [cateNewName, setCateNewName] = useState('')
+    const [modalRename, setModalRename] = useState(false)
+
+    const [currentId, setCurrentId] = useState('')
+
     const [isSub, setIsSub] = useState(false)
     const [parentCateId, setParentCateId] = useState(null)
 
@@ -20,6 +26,14 @@ const CategoryList = () => {
         setModalTitle('Add new category')
         setModal(true)
         setcateName('')
+        setIsSub(false)
+    }
+
+    const renameCategoryClick = (currentName, category) => {
+        setCateNewName(currentName)
+        setCurrentId(category.cateId)
+        setParentCateId(category.parentId)
+        setModalRename(true)
         setIsSub(false)
     }
 
@@ -36,7 +50,11 @@ const CategoryList = () => {
     }
 
     const saveSubCategory = () => {
-        dispatch(actions.createSubCategory(cateName, parentCateId))        
+        dispatch(actions.createSubCategory(cateName, parentCateId))
+    }
+
+    const renameCategory = () => {
+        dispatch(actions.renameCategory(cateNewName, { cateId: currentId, parentId: parentCateId }))
     }
 
     useEffect(() => {
@@ -45,7 +63,7 @@ const CategoryList = () => {
 
     let categoryTable = null
     if (!isLoading && !err & data.length !== 0) {
-        categoryTable = <CategoryTable data={data} addSubCate={addSubCateClick} />
+        categoryTable = <CategoryTable data={data} addSubCate={addSubCateClick} renameCategory={renameCategoryClick} />
     }
 
     return (
@@ -93,6 +111,34 @@ const CategoryList = () => {
                     <CButton
                         color="secondary"
                         onClick={() => setModal(false)}
+                    >Cancel</CButton>
+                </CModalFooter>
+            </CModal>
+
+            <CModal
+                show={modalRename}
+                onClose={setModalRename}
+            >
+                <CModalHeader closeButton>
+                    <CModalTitle>Rename category</CModalTitle>
+                </CModalHeader>
+                <CModalBody>
+                    <CRow>
+                        <CCol xl='12' md='12'>
+                            <div className='form-group'>
+                                <label>Name</label>
+                                <input type='text' className='form-control' value={cateNewName} onChange={(e) => setCateNewName(e.target.value)} />
+                            </div>
+                        </CCol>
+                    </CRow>
+                </CModalBody>
+                <CModalFooter>
+                    <CButton color="primary" disabled={cateNewName.length === 0} onClick={() => {
+                        renameCategory()
+                    }}>Save</CButton>{' '}
+                    <CButton
+                        color="secondary"
+                        onClick={() => setModalRename(false)}
                     >Cancel</CButton>
                 </CModalFooter>
             </CModal>

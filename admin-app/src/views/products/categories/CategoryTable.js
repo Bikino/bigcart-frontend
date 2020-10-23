@@ -23,7 +23,7 @@ const CategoryTable = (props) => {
                     <div className='col-md-6 col-xs-12' key={cate.id}>
                         <div key={cate.id} style={{ marginBottom: '5px' }}>
                             <h6 style={{ display: 'inline-block', marginRight: '15px' }}>{cate.name}</h6>
-                            <CButton color='danger' size='sm'>Add sub category</CButton>
+                            <CButton color='danger' size='sm' onClick={() => props.addSubCate(cate.name, cate.id)}>Add sub category</CButton>
                         </div>
                         {
                             <SubCateGoryList data={cate.children} />

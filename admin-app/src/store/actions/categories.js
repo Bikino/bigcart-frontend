@@ -58,3 +58,58 @@ export const getCategoryList = () => {
     }
 }
 
+const createCategoryStart = () => ({
+    type: actionTypes.CATEGORIES_CREATE_START
+})
+
+const createCategoryFail = (err) => ({
+    type: actionTypes.CATEGORIES_CREATE_FAIL,
+    err,
+})
+
+const createCategorySuccess = (category) => ({
+    type: actionTypes.CATEGORIES_CREATE_SUCCESS,
+    category
+})
+
+export const createCategory = (cateName) => {
+    return async dispatch => {
+        dispatch(createCategoryStart())
+        try {
+            const response = await categorySvc.createCategory(cateName)
+            const { data } = response
+            dispatch(createCategorySuccess(data))
+        }
+        catch (err) {
+            dispatch(createCategoryFail(new Error('error occured')))
+        }
+    }
+}
+
+const createSubCategoryStart = () => ({
+    type: actionTypes.CATEGORIES_CREATE_SUB_START
+})
+
+const createSubCategoryFail = (err) => ({
+    type: actionTypes.CATEGORIES_CREATE_SUB_FAIL,
+    err,
+})
+
+const createSubCategorySuccess = (category) => ({
+    type: actionTypes.CATEGORIES_CREATE_SUB_SUCCESS,
+    category
+})
+
+export const createSubCategory = (cateName, parentId) => {
+    return async dispatch => {
+        dispatch(createSubCategoryStart())
+        try {
+            const response = await categorySvc.createSubCategory(cateName, parentId)
+            const { data } = response
+            dispatch(createSubCategorySuccess(data))
+        }
+        catch (err) {
+            dispatch(createSubCategoryFail(new Error('error occured')))
+        }
+    }
+}

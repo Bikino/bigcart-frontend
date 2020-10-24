@@ -47,6 +47,8 @@ const PendingVendors = React.lazy(() => import('./views/vendors/pending-vendors/
 const VendorList = React.lazy(() => import('./views/vendors/vendor-list/VendorList'))
 const VendorDetail = React.lazy(() => import('./views/vendors/VendorDetail'))
 
+const BuyerList = React.lazy(() => import('./views/buyers/BuyerList'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -95,7 +97,7 @@ const routes = [
   { path: '/vendors/pending', exact: true, name: 'Pending Vendors', component: PendingVendors },
   { path: '/vendors', exact: true, name: 'Vendor List', component: VendorList },
   { path: '/vendors/:id', exact: true, name: 'Vendor Detail', component: VendorDetail },
-
+  { path: '/buyers', exact: true, name: 'Buyer List', component: BuyerList },
 ];
 
 export default routes;

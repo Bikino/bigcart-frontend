@@ -16,7 +16,7 @@ const ProductDetail = (props) => {
     const { isLoading, err, data } = useSelector(state => state.productReducer.productDetail)
     let content = <div>Loading...</div>
 
-    if (!isLoading && !err && DataTransfer) {
+    if (!isLoading && !err && data) {
         content = (
             <CRow>
                 <CCol xl='12' md='12'>

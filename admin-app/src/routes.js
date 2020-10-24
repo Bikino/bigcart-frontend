@@ -43,6 +43,12 @@ const ProductList = React.lazy(() => import('./views/products/product-list/Produ
 const CategoryList = React.lazy(() => import('./views/products/categories/CategoryList'))
 const ProductDetail = React.lazy(() => import('./views/products/ProductDetail'))
 
+const PendingVendors = React.lazy(() => import('./views/vendors/pending-vendors/PendingVendors'))
+const VendorList = React.lazy(() => import('./views/vendors/vendor-list/VendorList'))
+const VendorDetail = React.lazy(() => import('./views/vendors/VendorDetail'))
+
+const BuyerList = React.lazy(() => import('./views/buyers/BuyerList'))
+
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
@@ -88,7 +94,10 @@ const routes = [
   { path: '/products', exact: true, name: 'Product List', component: ProductList },
   { path: '/products/:id', exact: true, name: 'Product Detail', component: ProductDetail },
   { path: '/categories', exact: true, name: 'Category List', component: CategoryList },
-
+  { path: '/vendors/pending', exact: true, name: 'Pending Vendors', component: PendingVendors },
+  { path: '/vendors', exact: true, name: 'Vendor List', component: VendorList },
+  { path: '/vendors/:id', exact: true, name: 'Vendor Detail', component: VendorDetail },
+  { path: '/buyers', exact: true, name: 'Buyer List', component: BuyerList },
 ];
 
 export default routes;

@@ -7,6 +7,8 @@ import token from './token'
 import sidebarShow from './sidebarShow'
 import productReducer from './products'
 import categoryReducer from './categories'
+import vendorReducer from './vendors'
+import buyerReducer from './buyers'
 
 const tokenPersistConfig = {
     key: 'token',
@@ -19,6 +21,8 @@ const appReducer = combineReducers({
     sidebarShow,
     productReducer,
     categoryReducer,
+    vendorReducer,
+    buyerReducer,
 })
 
 const rootReducer = (state, action) => {

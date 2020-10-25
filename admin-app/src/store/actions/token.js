@@ -2,6 +2,8 @@ import * as actionTypes from './actionTypes'
 import { saveToken } from '../../helper/authentication'
 import history from '../../helper/history'
 import { auth as authSvc } from '../../services/token.service'
+import { loadVendorForDropDown } from './vendors'
+import { loadCategoryForDropDown } from './categories'
 
 const getTokenStart = () => ({
     type: actionTypes.TOKEN_GET_START
@@ -24,8 +26,10 @@ export const getToken = (username, password) => {
         try {
             let response = await authSvc(username, password)
             let { idToken, expiresIn } = response.data
-            dispatch(getTokenSuccess(idToken, expiresIn))
             saveToken(idToken)
+            dispatch(getTokenSuccess(idToken, expiresIn))
+            dispatch(loadVendorForDropDown())
+            dispatch(loadCategoryForDropDown())
             history.push('/')
 
         }
@@ -38,11 +42,3 @@ export const getToken = (username, password) => {
 export const userLogout = () => ({
     type: actionTypes.USER_LOGGED_OUT
 })
-
-// const fakeLogin = (username, password) => {
-//     return new Promise((resolve) => setTimeout(() => {
-//         let token = username + password
-//         let expirationTime = 15000
-//         resolve({ token, expirationTime })
-//     }, 3000))
-// }

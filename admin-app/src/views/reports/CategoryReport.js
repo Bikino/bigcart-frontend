@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 
 import axios from 'axios'
 
-const Report = () => {
+const CategoryReport = () => {
 
     const getReport = (url) => {
         axios.get('https://localhost:44383/api/Candidates/pdf', {
@@ -16,12 +16,16 @@ const Report = () => {
             .catch(err => console.log(err))
     }
 
+    useEffect(() => {
+        getReport()
+    }, [])
+
     return (
         <CRow>
             <CCol xl='12' md='12'>
                 <CCard>
                     <CCardHeader>
-                        <h5 style={{ display: 'inline-block' }}>Sales Report</h5>
+                        <h5 style={{ display: 'inline-block' }}>Sales Report By Category</h5>
                     </CCardHeader>
                     <CCardBody>
                     </CCardBody>
@@ -31,4 +35,4 @@ const Report = () => {
     )
 }
 
-export default Report
+export default CategoryReport

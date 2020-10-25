@@ -9,6 +9,7 @@ import productReducer from './products'
 import categoryReducer from './categories'
 import vendorReducer from './vendors'
 import buyerReducer from './buyers'
+import alertReducer from './alerts'
 
 const tokenPersistConfig = {
     key: 'token',
@@ -23,6 +24,7 @@ const appReducer = combineReducers({
     categoryReducer,
     vendorReducer,
     buyerReducer,
+    alertReducer,
 })
 
 const rootReducer = (state, action) => {

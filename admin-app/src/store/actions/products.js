@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import * as productSvc from '../../services/products.service'
+import { showAlertError, showAlertSuccess } from './alert'
 
 const getNewProductsStart = () => ({
     type: actionTypes.PRODUCTS_GET_NEW_LIST_START
@@ -127,9 +128,11 @@ export const approveProduct = (id) => {
             const { data } = response
             const { id: productId } = data
             dispatch(approveProductSuccess(productId))
+            dispatch(showAlertSuccess('Product has been approved!'))
         }
         catch (err) {
             dispatch(approveProductFail(new Error('error occured')))
+            dispatch(showAlertError('Error occured'))
         }
     }
 }
@@ -157,9 +160,11 @@ export const declineProduct = (id) => {
             const { data } = response
             const { id: productId } = data
             dispatch(declineProductSuccess(productId))
+            dispatch(showAlertSuccess('Product has been declined!'))
         }
         catch (err) {
             dispatch(declineProductFail(new Error('error occured')))
+            dispatch(showAlertError('Error occured'))
         }
     }
 }

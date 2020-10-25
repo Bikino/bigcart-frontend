@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 
 import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const CategoryReport = () => {
 
-    const getReport = (url) => {
-        axios.get('https://localhost:44383/api/Candidates/pdf', {
+    const [seletedId, setSeletedId] = useState('')
+    const { isLoading, data, err } = useSelector(state => state.categoryReducer.categoryForDropDown)
+
+    const getReport = (categoryId) => {
+        axios.get('http://localhost:81/sample.pdf', {
             responseType: 'blob'
         })
             .then(response => {
@@ -16,8 +20,17 @@ const CategoryReport = () => {
             .catch(err => console.log(err))
     }
 
+    let options = null
+    if (!isLoading && !err && data.length > 0) {
+        options = data.map(v => (
+            <option key={v.id} value={v.id}>{v.name}</option>
+        ))
+    }
+
     useEffect(() => {
-        getReport()
+        if (!isLoading && !err && data.length > 0) {
+            setSeletedId(data[0].id)
+        }
     }, [])
 
     return (
@@ -28,6 +41,18 @@ const CategoryReport = () => {
                         <h5 style={{ display: 'inline-block' }}>Sales Report By Category</h5>
                     </CCardHeader>
                     <CCardBody>
+                        <div className='row'>
+                            <div className='form-group col-md-6'>
+                                <select className='form-control' value={seletedId} onChange={(e) => {
+                                    setSeletedId(e.target.value)
+                                }}>
+                                    {options}
+                                </select>
+                            </div>
+                            <div className='col-md-6'>
+                                <button className='btn btn-primary' onClick={() => { getReport(seletedId) }}>View report</button>
+                            </div>
+                        </div>
                     </CCardBody>
                 </CCard>
             </CCol>

@@ -8,7 +8,7 @@ const initialState = {
 }
 
 const token = (state = initialState, action) => {
-    switch (action.types) {
+    switch (action.type) {
         case actionType.TOKEN_GET_START:
             return { ...state, isLoading: true }
         case actionType.TOKEN_GET_SUCCESS:

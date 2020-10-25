@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {
-  CBadge,
+  //CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
@@ -36,7 +36,7 @@ const TheHeaderDropdown = () => {
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownItem
+        {/* <CDropdownItem
           header
           tag="div"
           color="light"
@@ -89,10 +89,10 @@ const TheHeaderDropdown = () => {
           Projects
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
-        <CDropdownItem divider />
+        <CDropdownItem divider /> */}
         <CDropdownItem onClick={logoutClick}>
           <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+          Sign Out
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

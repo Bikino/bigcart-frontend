@@ -1,23 +1,23 @@
 import React, { lazy } from 'react'
 import {
-  CBadge,
+  //CBadge,
   CButton,
   CButtonGroup,
   CCard,
   CCardBody,
   CCardFooter,
-  CCardHeader,
+  //CCardHeader,
   CCol,
   CProgress,
   CRow,
-  CCallout
+  //CCallout
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 import MainChartExample from '../charts/MainChartExample.js'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
-const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
+//const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = () => {
   return (
@@ -32,7 +32,7 @@ const Dashboard = () => {
             </CCol>
             <CCol sm="7" className="d-none d-md-block">
               <CButton color="primary" className="float-right">
-                <CIcon name="cil-cloud-download"/>
+                <CIcon name="cil-cloud-download" />
               </CButton>
               <CButtonGroup className="float-right mr-3">
                 {
@@ -50,7 +50,7 @@ const Dashboard = () => {
               </CButtonGroup>
             </CCol>
           </CRow>
-          <MainChartExample style={{height: '300px', marginTop: '40px'}}/>
+          <MainChartExample style={{ height: '300px', marginTop: '40px' }} />
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -107,9 +107,9 @@ const Dashboard = () => {
         </CCardFooter>
       </CCard>
 
-      <WidgetsBrand withCharts/>
+      {/* <WidgetsBrand withCharts /> */}
 
-      <CRow>
+      {/* <CRow>
         <CCol>
           <CCard>
             <CCardHeader>
@@ -152,7 +152,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Tuesday
+                        Tuesday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -163,7 +163,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Wednesday
+                        Wednesday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -174,7 +174,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Thursday
+                        Thursday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -185,7 +185,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Friday
+                        Friday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -196,7 +196,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Saturday
+                        Saturday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -207,7 +207,7 @@ const Dashboard = () => {
                   <div className="progress-group mb-4">
                     <div className="progress-group-prepend">
                       <span className="progress-group-text">
-                      Sunday
+                        Sunday
                       </span>
                     </div>
                     <div className="progress-group-bars">
@@ -501,7 +501,7 @@ const Dashboard = () => {
                       <CProgress className="progress-xs" color="info" value="22" />
                     </td>
                     <td className="text-center">
-                      <CIcon height={25} name="cib-google-pay"/>
+                      <CIcon height={25} name="cib-google-pay" />
                     </td>
                     <td>
                       <div className="small text-muted">Last login</div>
@@ -549,7 +549,7 @@ const Dashboard = () => {
             </CCardBody>
           </CCard>
         </CCol>
-      </CRow>
+      </CRow> */}
     </>
   )
 }

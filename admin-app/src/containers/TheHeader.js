@@ -7,20 +7,20 @@ import {
   CHeaderNav,
   CHeaderNavItem,
   CHeaderNavLink,
-  CSubheader,
-  CBreadcrumbRouter,
-  CLink
+  // CSubheader,
+  // CBreadcrumbRouter,
+  // CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
 // routes config
-import routes from '../routes'
+//import routes from '../routes'
 
 import {
   TheHeaderDropdown,
-  TheHeaderDropdownMssg,
-  TheHeaderDropdownNotif,
-  TheHeaderDropdownTasks
+  // TheHeaderDropdownMssg,
+  // TheHeaderDropdownNotif,
+  // TheHeaderDropdownTasks
 } from './index'
 
 const TheHeader = () => {
@@ -57,22 +57,22 @@ const TheHeader = () => {
         <CHeaderNavItem className="px-3" >
           <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
+        {/* <CHeaderNavItem className="px-3">
           <CHeaderNavLink to="/users">Users</CHeaderNavLink>
         </CHeaderNavItem>
         <CHeaderNavItem className="px-3">
           <CHeaderNavLink>Settings</CHeaderNavLink>
-        </CHeaderNavItem>
+        </CHeaderNavItem> */}
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <TheHeaderDropdownNotif />
+        {/* <TheHeaderDropdownNotif />
         <TheHeaderDropdownTasks />
-        <TheHeaderDropdownMssg />
+        <TheHeaderDropdownMssg /> */}
         <TheHeaderDropdown />
       </CHeaderNav>
 
-      <CSubheader className="px-3 justify-content-between">
+      {/* <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter
           className="border-0 c-subheader-nav m-0 px-0 px-md-3"
           routes={routes}
@@ -92,7 +92,7 @@ const TheHeader = () => {
             <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
             </CLink>
         </div>
-      </CSubheader>
+      </CSubheader> */}
     </CHeader>
   )
 }

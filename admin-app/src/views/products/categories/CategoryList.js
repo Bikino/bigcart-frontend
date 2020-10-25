@@ -20,6 +20,9 @@ const CategoryList = () => {
     const [parentCateId, setParentCateId] = useState(null)
 
     const { isLoading, err, data } = useSelector(state => state.categoryReducer.categories)
+    const { isProcessing: renaming, err: renameErr, data: renameData } = useSelector(state => state.categoryReducer.renameCategory)
+    const { isProcessing: creating, err: createErr, data: createData } = useSelector(state => state.categoryReducer.createCategory)
+
     const dispatch = useDispatch()
 
     const addCategoryClick = () => {
@@ -65,6 +68,18 @@ const CategoryList = () => {
     if (!isLoading && !err & data.length !== 0) {
         categoryTable = <CategoryTable data={data} addSubCate={addSubCateClick} renameCategory={renameCategoryClick} />
     }
+
+    useEffect(() => {
+        if (!renaming && (renameErr || renameData)) {
+            setModalRename(false)
+        }
+    }, [renaming, renameErr, renameData])
+
+    useEffect(() => {
+        if (!creating && (createErr || createData)) {
+            setModal(false)
+        }
+    }, [creating, createErr, createData])
 
     return (
         <>

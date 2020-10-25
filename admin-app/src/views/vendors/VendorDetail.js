@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, } from 'react-redux'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
-
-import * as actions from '../../store/actions'
-
 const VendorDetail = (props) => {
 
     const dispatch = useDispatch()

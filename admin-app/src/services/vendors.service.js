@@ -30,7 +30,7 @@ export const declineVednor = async (id) => {
 }
 
 const fakeApprove = (id) => {
-    return new Promise((resolve) => setTimeout(() => {
+    return new Promise((resolve, reject) => setTimeout(() => {
         resolve({ data: { id } })
     }, 1000))
 }

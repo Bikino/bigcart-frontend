@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import * as vendorSvc from '../../services/vendors.service'
+import { showAlertSuccess, showAlertError } from './alert'
 
 const getPendingVendorsStart = () => ({
     type: actionTypes.VENDOR_GET_PENDING_LIST_START
@@ -88,9 +89,11 @@ export const approveVendor = (id) => {
             const { data } = response
             const { id: vendorId } = data
             dispatch(approveVendorSuccess(vendorId))
+            dispatch(showAlertSuccess('Vendor has been approved!'))
         }
         catch (err) {
             dispatch(approveVendorFail(new Error('error occured')))
+            dispatch(showAlertError('Error occured'))
         }
     }
 }
@@ -118,9 +121,11 @@ export const declineVendor = (id) => {
             const { data } = response
             const { id: vendorId } = data
             dispatch(declineVendorSuccess(vendorId))
+            dispatch(showAlertSuccess('Vendor has been declined!'))
         }
         catch (err) {
             dispatch(declineVendorFail(new Error('error occured')))
+            dispatch(showAlertError('Error occured'))
         }
     }
 }

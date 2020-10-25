@@ -8,7 +8,7 @@ import PendingVendorTable from './PendingVendorTable'
 const PendingVendors = (props) => {
 
     const dispatch = useDispatch()
-    const { isLoading, err, data: vendors } = useSelector(state => state.vendorReducer.pendingVendors)
+    const { isLoading, err, data: vendors } = useSelector(state => state.vendorReducer.pendingVendors)    
 
     useEffect(() => {
         dispatch(actions.getPendingVendorList())

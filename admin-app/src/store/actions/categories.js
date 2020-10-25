@@ -141,3 +141,35 @@ export const renameCategory = (newName, category) => {
         }
     }
 }
+
+const loadCategoryForDropDownStart = () => ({
+    type: actionTypes.CATEGORY_LOAD_FOR_DROPDOWN_START
+})
+
+const loadCategoryForDropDownFail = (err) => ({
+    type: actionTypes.CATEGORY_LOAD_FOR_DROPDOWN_FAIL,
+    err
+})
+
+const loadCategoryForDropDownSuccess = (categories) => ({
+    type: actionTypes.CATEGORY_LOAD_FOR_DROPDOWN_SUCCESS,
+    categories
+})
+
+export const loadCategoryForDropDown = () => (
+    async dispatch => {
+        dispatch(loadCategoryForDropDownStart())
+        try {
+            const response = await categorySvc.getCategoryList()
+            const { data } = response
+            let categories = []
+            for (let key in data) {
+                categories.push({ id: key, name: data[key].name })
+            }
+            dispatch(loadCategoryForDropDownSuccess(categories))
+        }
+        catch (err) {
+            dispatch(loadCategoryForDropDownFail(new Error('error occured')))
+        }
+    }
+)

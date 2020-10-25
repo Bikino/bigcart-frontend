@@ -129,3 +129,36 @@ export const declineVendor = (id) => {
         }
     }
 }
+
+
+const loadVendorForDropDownStart = () => ({
+    type: actionTypes.VENDOR_LOAD_FOR_DROPDOWN_START
+})
+
+const loadVendorForDropDownFail = (err) => ({
+    type: actionTypes.VENDOR_LOAD_FOR_DROPDOWN_FAIL,
+    err
+})
+
+const loadVendorForDropDownSuccess = (vendors) => ({
+    type: actionTypes.VENDOR_LOAD_FOR_DROPDOWN_SUCCESS,
+    vendors
+})
+
+export const loadVendorForDropDown = () => (
+    async dispatch => {
+        dispatch(loadVendorForDropDownStart())
+        try {
+            const response = await vendorSvc.getVendorList()
+            const { data } = response
+            let vendors = []
+            for (let key in data) {
+                vendors.push({ id: key, name: data[key].name })
+            }
+            dispatch(loadVendorForDropDownSuccess(vendors))
+        }
+        catch (err) {
+            dispatch(loadVendorForDropDownFail(new Error('error occured')))
+        }
+    }
+)

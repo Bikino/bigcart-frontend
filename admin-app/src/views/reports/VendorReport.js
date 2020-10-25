@@ -8,7 +8,7 @@ const VendorReport = () => {
     const [seletedId, setSeletedId] = useState('')
 
     const getReport = (seletedId) => {
-        axios.get('https://localhost:44383/api/Candidates/pdf', {
+        axios.get('http://localhost:81/sample.pdf', {
             responseType: 'blob'
         })
             .then(response => {

@@ -14,9 +14,17 @@ const PendingVendors = (props) => {
         dispatch(actions.getPendingVendorList())
     }, [dispatch])
 
+    const approveVendor = (vendorId) => {
+        dispatch(actions.approveVendor(vendorId))
+    }
+
+    const declineVendor = (vendorId) => {
+        dispatch(actions.declineVendor(vendorId))
+    }
+
     let vendorTable = null
     if (!isLoading && !err && vendors.length > 0) {
-        vendorTable = <PendingVendorTable data={vendors} />
+        vendorTable = <PendingVendorTable data={vendors} approveVendorHandler={approveVendor} declineVendorHandler={declineVendor} />
     }
 
     return (

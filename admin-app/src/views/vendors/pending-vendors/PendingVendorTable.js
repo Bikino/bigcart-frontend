@@ -6,7 +6,7 @@ const PendingVendorTable = (props) => {
     return (
         <table className='table'>
             <thead>
-                <tr>                    
+                <tr>
                     <th>Name</th>
                     <th>Phone</th>
                     <th>Email</th>
@@ -23,10 +23,10 @@ const PendingVendorTable = (props) => {
                             <td>{p.email}</td>
                             <td>10/21/2020</td>
                             <td>
-                                <CButton size='sm' block color="success">Approve</CButton>
+                                <CButton size='sm' block color="success" onClick={() => props.approveVendorHandler(p.id)}>Approve</CButton>
                             </td>
                             <td>
-                                <CButton size='sm' block color="danger">Decline</CButton>
+                                <CButton size='sm' block color="danger" onClick={() => props.declineVendorHandler(p.id)}>Decline</CButton>
                             </td>
                         </tr>
                     ))

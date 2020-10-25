@@ -66,7 +66,9 @@ const CategoryList = () => {
 
     let categoryTable = null
     if (!isLoading && !err & data.length !== 0) {
-        categoryTable = <CategoryTable data={data} addSubCate={addSubCateClick} renameCategory={renameCategoryClick} />
+        categoryTable = <CategoryTable data={data}
+            addSubCate={addSubCateClick}
+            renameCategory={renameCategoryClick} />
     }
 
     useEffect(() => {

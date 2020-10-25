@@ -34,10 +34,10 @@ const PendingProductTable = (props) => {
                                 <CButton size='sm' block color="info" onClick={() => { detailClick(p.id) }}>Detail</CButton>
                             </td>
                             <td>
-                                <CButton size='sm' block color="success">Approve</CButton>
+                                <CButton size='sm' block color="success" onClick={() => { props.approveProductHandler(p.id) }}>Approve</CButton>
                             </td>
                             <td>
-                                <CButton size='sm' block color="danger">Decline</CButton>
+                                <CButton size='sm' block color="danger" onClick={() => { props.declineProductHandler(p.id) }}>Decline</CButton>
                             </td>
                         </tr>
                     ))

@@ -18,7 +18,7 @@ import CIcon from '@coreui/icons-react'
 
 import * as actions from '../../../store/actions'
 
-const Login = () => {
+const Login = (props) => {
 
   const [username, setUsername] = useState('')
   const [usernameTouched, setUsernameTouched] = useState(false)
@@ -29,7 +29,7 @@ const Login = () => {
   const [passwordErrorData, setpasswordErrorData] = useState({ hasError: false, message: '' })
 
   const [formValid, setFormValid] = useState(false)
-  //const [submitted, setSubmitted] = useState(false)
+
 
   const dispatch = useDispatch()
 
@@ -37,8 +37,6 @@ const Login = () => {
     evt.preventDefault()
     if (!formValid)
       return
-
-    //setSubmitted(true)
     dispatch(actions.getToken(username, password))
   }
 

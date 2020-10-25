@@ -64,3 +64,63 @@ export const getVendorList = () => (
         }
     }
 )
+
+const approveVendorStart = () => ({
+    type: actionTypes.VENDOR_APPROVE_START
+})
+
+
+const approveVendorFail = (err) => ({
+    type: actionTypes.VENDOR_APPROVE_FAIL,
+    err
+})
+
+const approveVendorSuccess = (vendorId) => ({
+    type: actionTypes.VENDOR_APPROVE_SUCCESS,
+    vendorId
+})
+
+export const approveVendor = (id) => {
+    return async dispatch => {
+        dispatch(approveVendorStart())
+        try {
+            const response = await vendorSvc.approveVendor(id)
+            const { data } = response
+            const { id: vendorId } = data
+            dispatch(approveVendorSuccess(vendorId))
+        }
+        catch (err) {
+            dispatch(approveVendorFail(new Error('error occured')))
+        }
+    }
+}
+
+const declineVendorStart = () => ({
+    type: actionTypes.VENDOR_DECLINE_START
+})
+
+
+const declineVendorFail = (err) => ({
+    type: actionTypes.VENDOR_DECLINE_FAIL,
+    err
+})
+
+const declineVendorSuccess = (vendorId) => ({
+    type: actionTypes.VENDOR_DECLINE_SUCCESS,
+    vendorId
+})
+
+export const declineVendor = (id) => {
+    return async dispatch => {
+        dispatch(declineVendorStart())
+        try {
+            const response = await vendorSvc.declineVednor(id)
+            const { data } = response
+            const { id: vendorId } = data
+            dispatch(declineVendorSuccess(vendorId))
+        }
+        catch (err) {
+            dispatch(declineVendorFail(new Error('error occured')))
+        }
+    }
+}

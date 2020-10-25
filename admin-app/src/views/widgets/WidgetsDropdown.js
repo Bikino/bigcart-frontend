@@ -3,12 +3,12 @@ import {
   CWidgetDropdown,
   CRow,
   CCol,
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle
+  // CDropdown,
+  // CDropdownMenu,
+  // CDropdownItem,
+  // CDropdownToggle
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+//import CIcon from '@coreui/icons-react'
 import ChartLineSimple from '../charts/ChartLineSimple'
 import ChartBarSimple from '../charts/ChartBarSimple'
 
@@ -33,7 +33,7 @@ const WidgetsDropdown = () => {
             />
           }
         >
-          <CDropdown>
+          {/* <CDropdown>
             <CDropdownToggle color="transparent">
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
@@ -43,7 +43,7 @@ const WidgetsDropdown = () => {
               <CDropdownItem>Something else here...</CDropdownItem>
               <CDropdownItem disabled>Disabled action</CDropdownItem>
             </CDropdownMenu>
-          </CDropdown>
+          </CDropdown> */}
         </CWidgetDropdown>
       </CCol>
 
@@ -65,7 +65,7 @@ const WidgetsDropdown = () => {
             />
           }
         >
-          <CDropdown>
+          {/* <CDropdown>
             <CDropdownToggle caret={false} color="transparent">
               <CIcon name="cil-location-pin"/>
             </CDropdownToggle>
@@ -75,7 +75,7 @@ const WidgetsDropdown = () => {
               <CDropdownItem>Something else here...</CDropdownItem>
               <CDropdownItem disabled>Disabled action</CDropdownItem>
             </CDropdownMenu>
-          </CDropdown>
+          </CDropdown> */}
         </CWidgetDropdown>
       </CCol>
 
@@ -97,7 +97,7 @@ const WidgetsDropdown = () => {
             />
           }
         >
-          <CDropdown>
+          {/* <CDropdown>
             <CDropdownToggle color="transparent">
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
@@ -107,7 +107,7 @@ const WidgetsDropdown = () => {
               <CDropdownItem>Something else here...</CDropdownItem>
               <CDropdownItem disabled>Disabled action</CDropdownItem>
             </CDropdownMenu>
-          </CDropdown>
+          </CDropdown> */}
         </CWidgetDropdown>
       </CCol>
 
@@ -126,7 +126,7 @@ const WidgetsDropdown = () => {
             />
           }
         >
-          <CDropdown>
+          {/* <CDropdown>
             <CDropdownToggle caret className="text-white" color="transparent">
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
@@ -136,7 +136,7 @@ const WidgetsDropdown = () => {
               <CDropdownItem>Something else here...</CDropdownItem>
               <CDropdownItem disabled>Disabled action</CDropdownItem>
             </CDropdownMenu>
-          </CDropdown>
+          </CDropdown> */}
         </CWidgetDropdown>
       </CCol>
     </CRow>

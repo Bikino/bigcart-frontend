@@ -103,3 +103,63 @@ export const getProductDetail = (id) => {
         }
     }
 }
+
+const approveProductStart = () => ({
+    type: actionTypes.PRODUCTS_APPROVE_START
+})
+
+
+const approveProductFail = (err) => ({
+    type: actionTypes.PRODUCTS_APPROVE_FAIL,
+    err
+})
+
+const approveProductSuccess = (productId) => ({
+    type: actionTypes.PRODUCTS_APPROVE_SUCCESS,
+    productId
+})
+
+export const approveProduct = (id) => {
+    return async dispatch => {
+        dispatch(approveProductStart())
+        try {
+            const response = await productSvc.approveProduct(id)
+            const { data } = response
+            const { id: productId } = data
+            dispatch(approveProductSuccess(productId))
+        }
+        catch (err) {
+            dispatch(approveProductFail(new Error('error occured')))
+        }
+    }
+}
+
+const declineProductStart = () => ({
+    type: actionTypes.PRODUCTS_DECLINE_START
+})
+
+
+const declineProductFail = (err) => ({
+    type: actionTypes.PRODUCTS_DECLINE_FAIL,
+    err
+})
+
+const declineProductSuccess = (productId) => ({
+    type: actionTypes.PRODUCTS_DECLINE_SUCCESS,
+    productId
+})
+
+export const declineProduct = (id) => {
+    return async dispatch => {
+        dispatch(declineProductStart())
+        try {
+            const response = await productSvc.declineProduct(id)
+            const { data } = response
+            const { id: productId } = data
+            dispatch(declineProductSuccess(productId))
+        }
+        catch (err) {
+            dispatch(declineProductFail(new Error('error occured')))
+        }
+    }
+}

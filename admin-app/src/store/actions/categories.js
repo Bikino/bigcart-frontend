@@ -16,7 +16,7 @@ const getCategoryListSuccess = (categories) => ({
 })
 
 export const getCategoryList = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         dispatch(getCategoryListStart())
         try {
             const response = await categorySvc.getCategoryList()

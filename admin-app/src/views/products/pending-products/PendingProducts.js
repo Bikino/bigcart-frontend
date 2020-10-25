@@ -11,13 +11,23 @@ const PendingProducts = (props) => {
 
     const { isLoading, err, data: products } = useSelector(state => state.productReducer.pendingProducts)
 
+    const approveProduct = (productId) => {
+        dispatch(actions.approveProduct(productId))
+    }
+
+    const declineProduct = (productId) => {
+        dispatch(actions.declineProduct(productId))
+    }
+
     useEffect(() => {
         dispatch(actions.getNewProducts())
     }, [dispatch])
 
     let productTable = null
     if (!isLoading && !err && products.length > 0) {
-        productTable = <PendingProductTable data={products} />
+        productTable = <PendingProductTable data={products}
+            declineProductHandler={declineProduct}
+            approveProductHandler={approveProduct} />
     }
 
     return (

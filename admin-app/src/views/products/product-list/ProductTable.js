@@ -24,14 +24,14 @@ const ProductTable = (props) => {
             <tbody>
                 {
                     props.data.map((p) => (
-                        <tr key={p.id}>
-                            <td>{p.category}</td>
-                            <td>{p.vendor}</td>
-                            <td>{p.name}</td>
+                        <tr key={p.vendorProductId}>
+                            <td>{p.categoryName}</td>
+                            <td>{p.vendorName}</td>
+                            <td>{p.productName}</td>
                             <td>${p.price}</td>
-                            <td>10/21/2020</td>
+                            <td>{new Date(p.requestDate).toDateString()}</td>
                             <td>
-                                <CButton size='sm' block color="info" onClick={() => { detailClick(p.id) }}>Detail</CButton>
+                                <CButton size='sm' block color="info" onClick={() => { detailClick(p.vendorProductId) }}>Detail</CButton>
                             </td>
                         </tr>
                     ))

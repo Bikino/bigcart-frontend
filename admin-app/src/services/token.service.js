@@ -11,13 +11,9 @@ export const auth = async (email, password) => {
     return response
 }
 
-// export const auth2 = (email, password) => {
-//     const apiKey = 'AIzaSyA0SwdbGkcfMjgvPTklbUJBADVKWQOY4MU'
-//     let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`
-
-//     return axios.post(url, {
-//         email,
-//         password,
-//         returnSecureToken: true
-//     })
+// export const auth = async (email, password) => {
+//     //let url = `http://localhost:8100/oauth/token?grant_type=password&username=${email}&password=${password}`
+//     let url = `http://localhost:8001/products/`
+//     const response = await axios.get(url)
+//     return response
 // }

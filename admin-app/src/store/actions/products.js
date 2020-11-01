@@ -23,12 +23,18 @@ export const getNewProducts = () => {
         try {
             const response = await productSvc.getPendingProducts()
             const products = []
-            for (let key in response.data) {
+            response.data.forEach(p => {
                 products.push({
-                    ...response.data[key],
-                    id: key
+                    vendorProductId: p.vendorProductId,
+                    categoryId: p.categoryId,
+                    categoryName: p.categoryName,
+                    vendorId: p.vendorId,
+                    vendorName: p.vendorName,
+                    productName: p.productName,
+                    price: p.price,
+                    requestDate: p.requestDate,
                 })
-            }
+            })
             dispatch(getNewProductsSuccess(products))
         }
         catch (err) {
@@ -58,12 +64,17 @@ export const getProductList = () => {
         try {
             const response = await productSvc.getProducts()
             const products = []
-            for (let key in response.data) {
+            response.data.forEach(p => {
                 products.push({
-                    ...response.data[key],
-                    id: key
+                    vendorProductId: p.vendorProductId,
+                    categoryId: p.categoryId,
+                    vendorId: p.vendorId,
+                    vendorName: p.vendorName,
+                    productName: p.productName,
+                    price: p.price,
+                    requestDate: p.requestDate,
                 })
-            }
+            })
             dispatch(getProductListSuccess(products))
         }
         catch (err) {
@@ -126,9 +137,14 @@ export const approveProduct = (id) => {
         try {
             const response = await productSvc.approveProduct(id)
             const { data } = response
-            const { id: productId } = data
-            dispatch(approveProductSuccess(productId))
-            dispatch(showAlertSuccess('Product has been approved!'))
+            if (data === true) {
+                dispatch(approveProductSuccess(id))
+                dispatch(showAlertSuccess('Products has been approved!'))
+            }
+            else {
+                dispatch(approveProductFail(new Error('error occured')))
+                dispatch(showAlertError('Error occured'))
+            }
         }
         catch (err) {
             dispatch(approveProductFail(new Error('error occured')))

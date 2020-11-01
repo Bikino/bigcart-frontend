@@ -17,11 +17,11 @@ const getNewProductsSuccess = (products) => ({
     products
 })
 
-export const getNewProducts = () => {
+export const getNewProducts = (categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getNewProductsStart())
         try {
-            const response = await productSvc.getPendingProducts()
+            const response = await productSvc.getPendingProducts(categoryId, vendorId, productName)
             const products = []
             response.data.forEach(p => {
                 products.push({
@@ -58,7 +58,7 @@ const getProductListSuccess = (products) => ({
     products
 })
 
-export const getProductList = () => {
+export const getProductList = (categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getProductListStart())
         try {

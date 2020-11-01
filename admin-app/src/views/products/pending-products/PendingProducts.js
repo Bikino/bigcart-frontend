@@ -4,6 +4,7 @@ import { CButton, CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/reac
 
 import * as actions from '../../../store/actions'
 import PendingProductTable from './PendingProductTable'
+import SearchBar from '../SearchBar'
 
 const PendingProducts = (props) => {
 
@@ -18,6 +19,10 @@ const PendingProducts = (props) => {
     useEffect(() => {
         setProductIdArray([])
     }, [products])
+
+    const searchProducts = (categoryId, vendorId, productName) => {
+        dispatch(actions.getNewProducts(categoryId, vendorId, productName))
+    }
 
     let productTable = null
     if (!isLoading && !err) {
@@ -54,6 +59,7 @@ const PendingProducts = (props) => {
                             </div>
                         </CCardHeader>
                         <CCardBody>
+                            <SearchBar vendors={[]} categories={[]} searchProducts={searchProducts} />
                             {productTable}
                         </CCardBody>
                     </CCard>

@@ -31,7 +31,7 @@ const CategoryReport = () => {
         if (!isLoading && !err && data.length > 0) {
             setSeletedId(data[0].id)
         }
-    }, [])
+    }, [isLoading, err, data])
 
     return (
         <CRow>

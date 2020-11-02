@@ -11,6 +11,8 @@ const PendingProducts = (props) => {
     const dispatch = useDispatch()
     const [productIdArray, setProductIdArray] = useState([])
     const { isLoading, err, data: products } = useSelector(state => state.productReducer.pendingProducts)
+    const { data: categories } = useSelector(state => state.categoryReducer.categoryForDropDown)
+    const { data: vendors } = useSelector(state => state.vendorReducer.vendorForDropDown)
 
     useEffect(() => {
         dispatch(actions.getNewProducts())
@@ -59,7 +61,7 @@ const PendingProducts = (props) => {
                             </div>
                         </CCardHeader>
                         <CCardBody>
-                            <SearchBar vendors={[]} categories={[]} searchProducts={searchProducts} />
+                            <SearchBar vendors={vendors} categories={categories} searchProducts={searchProducts} />
                             {productTable}
                         </CCardBody>
                     </CCard>

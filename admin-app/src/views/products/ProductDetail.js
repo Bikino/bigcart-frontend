@@ -10,7 +10,10 @@ const ProductDetail = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(actions.getProductDetail(id))
+        console.log(id.split('-'))
+        const productId = id.split('-')[0]
+        const vendorId = id.split('-')[1]
+        dispatch(actions.getProductDetail(productId, vendorId))
     }, [id, dispatch])
 
     const { isLoading, err, data } = useSelector(state => state.productReducer.productDetail)
@@ -27,7 +30,7 @@ const ProductDetail = (props) => {
                         <CCardBody>
                             <div>
                                 <h5>{data.name} - {data.vendor}</h5>
-                                <img style={{ width: '100px' }} src={data.img} alt='' />
+                                <img style={{ width: '100px' }} src={data.imageUrl} alt='' />
                                 <h6 className='text-success'>Price: ${data.price}</h6>
                                 <p className='text-primary'>{data.description}</p>
                             </div>

@@ -21,12 +21,8 @@ export const getPendingVendorList = () => (
         dispatch(getPendingVendorsStart())
         try {
             const response = await vendorSvc.getPendingVendorList()
-            const { data } = response
-            let vendors = []
-            for (let key in data) {
-                vendors.push({ ...data[key], id: key })
-            }
-            dispatch(getPendingVendorsSuccess(vendors))
+            const { data } = response            
+            dispatch(getPendingVendorsSuccess(data))
         }
         catch (err) {
             dispatch(getPendingVendorsFail(new Error('error occured')))
@@ -54,11 +50,7 @@ export const getVendorList = () => (
         try {
             const response = await vendorSvc.getVendorList()
             const { data } = response
-            let vendors = []
-            for (let key in data) {
-                vendors.push({ ...data[key], id: key })
-            }
-            dispatch(getVendorListSuccess(vendors))
+            dispatch(getVendorListSuccess(data))
         }
         catch (err) {
             dispatch(getVendorListFail(new Error('error occured')))
@@ -150,12 +142,8 @@ export const loadVendorForDropDown = () => (
         dispatch(loadVendorForDropDownStart())
         try {
             const response = await vendorSvc.getVendorList()
-            const { data } = response
-            let vendors = []
-            for (let key in data) {
-                vendors.push({ id: key, name: data[key].name })
-            }
-            dispatch(loadVendorForDropDownSuccess(vendors))
+            const { data } = response           
+            dispatch(loadVendorForDropDownSuccess(data))
         }
         catch (err) {
             dispatch(loadVendorForDropDownFail(new Error('error occured')))

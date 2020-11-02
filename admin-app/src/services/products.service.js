@@ -1,17 +1,11 @@
 import axios from 'axios'
-import { parse } from 'semver'
 import { getToken } from '../helper/authentication'
 
-// export const getPendingProducts = async () => {
-//     let token = getToken()
-//     let url = `https://burger-udemy-2eecb.firebaseio.com/new-products.json?auth=${token}`
-//     const response = await axios.get(url)
-//     return response
-// }
 
 export const getPendingProducts = async (categoryId, vendorId, productName) => {
     let token = getToken()
-    const theUrl = new URL('http://localhost:8001/productvendors/findPendingProductsDTO')
+    const theUrl = new URL('http://localhost:8001/productvendors/findProductForAdminDTO')
+    theUrl.searchParams.append('status', 'pending')
 
     if (categoryId && categoryId > 0) {
         theUrl.searchParams.append('categoryId', categoryId)
@@ -30,30 +24,30 @@ export const getPendingProducts = async (categoryId, vendorId, productName) => {
     return response
 }
 
-// export const getProducts = async () => {
-//     let token = getToken()
-//     let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-//     const response = await axios.get(url)
-//     return response
-// }
-
-// export const getProducts = async () => {
-//     //let token = getToken()
-//     let url = `http://localhost:8001/products/`
-//     const response = await axios.get(url)
-//     return response
-// }
-
-export const getProducts = async () => {
+export const getProducts = async (categoryId, vendorId, productName) => {
     //let token = getToken()
-    let url = `http://localhost:8001/products/`
+    const theUrl = new URL('http://localhost:8001/productvendors/findProductForAdminDTO')
+    theUrl.searchParams.append('status', 'approved')
+    if (categoryId && categoryId > 0) {
+        theUrl.searchParams.append('categoryId', categoryId)
+    }
+
+    if (vendorId && vendorId > 0) {
+        theUrl.searchParams.append('vendorId', vendorId)
+    }
+
+    if (productName && productName.length > 0) {
+        theUrl.searchParams.append('productName', productName)
+    }
+
+    let url = theUrl.href
     const response = await axios.get(url)
     return response
 }
 
-export const getProductDetail = async (id) => {
+export const getProductDetail = async (productId, vendorId) => {
     let token = getToken()
-    let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
+    let url = `http://localhost:8001/productvendors/${productId}/${vendorId}`
     const response = await axios.get(url)
     return response
 }

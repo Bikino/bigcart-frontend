@@ -62,13 +62,14 @@ export const getProductList = (categoryId = 0, vendorId = 0, productName = '') =
     return async dispatch => {
         dispatch(getProductListStart())
         try {
-            const response = await productSvc.getProducts()
+            const response = await productSvc.getProducts(categoryId, vendorId, productName)
             const products = []
             response.data.forEach(p => {
                 products.push({
                     vendorProductId: p.vendorProductId,
                     categoryId: p.categoryId,
                     vendorId: p.vendorId,
+                    categoryName: p.categoryName,
                     vendorName: p.vendorName,
                     productName: p.productName,
                     price: p.price,
@@ -99,16 +100,13 @@ const getProductDetailSuccess = (product) => ({
     product
 })
 
-export const getProductDetail = (id) => {
+export const getProductDetail = (productId, vendorId) => {
     return async dispatch => {
         dispatch(getProductDetailStart())
         try {
-            const response = await productSvc.getProductDetail(id)
+            const response = await productSvc.getProductDetail(productId, vendorId)
             const { data } = response
-            let product = null
-            //mock
-            product = data[id]
-            dispatch(getProductDetailSuccess(product))
+            dispatch(getProductDetailSuccess(data))
         }
         catch (err) {
             dispatch(getProductDetailFail(new Error('error occured')))

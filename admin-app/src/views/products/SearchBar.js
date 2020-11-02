@@ -15,12 +15,10 @@ const SearchBar = (props) => {
             <div className='form-group mr-2 mb-2'>
                 <select className='form-control' onChange={(evt) => {
                     setCategoryId(evt.target.value)
-                    console.log(evt.target.value)
                 }}>
                     <option value={0}>All categories</option>
-                    <option value={1}>Tét</option>
                     {
-                        props.categories.map(c => <option value={c.categoryId}>{c.categoryName}</option>)
+                        props.categories.map((c) => <option key={c.name} value={c.categoryId}>{c.name}</option>)
                     }
                 </select>
             </div>
@@ -30,7 +28,7 @@ const SearchBar = (props) => {
                 }}>
                     <option>All vendors</option>
                     {
-                        props.vendors.map(c => <option value={c.vendorId}>{c.vendorName}</option>)
+                        props.vendors.map(c => <option key={c.id} value={c.id}>{c.companyName}</option>)
                     }
                 </select>
             </div>

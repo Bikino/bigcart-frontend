@@ -34,8 +34,8 @@ const CategoryList = () => {
 
     const renameCategoryClick = (currentName, category) => {
         setCateNewName(currentName)
-        setCurrentId(category.cateId)
-        setParentCateId(category.parentId)
+        setCurrentId(category.categoryId)
+        setParentCateId(category.parentCategoryId)
         setModalRename(true)
         setIsSub(false)
     }
@@ -57,7 +57,7 @@ const CategoryList = () => {
     }
 
     const renameCategory = () => {
-        dispatch(actions.renameCategory(cateNewName, { cateId: currentId, parentId: parentCateId }))
+        dispatch(actions.renameCategory(cateNewName, currentId, parentCateId))
     }
 
     useEffect(() => {

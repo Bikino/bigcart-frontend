@@ -31,7 +31,7 @@ const categories = (state = initialState, action) => {
 
 const subCategoryCreate = (state, action) => {
     const newData = [...state.data]
-    const parentCategory = newData.find(c => c.id === action.category.parentId)
+    const parentCategory = newData.find(c => c.categoryId === action.category.parentCategoryId)
     if (!parentCategory.children)
         parentCategory.children = []
 
@@ -41,14 +41,13 @@ const subCategoryCreate = (state, action) => {
 }
 
 const categoryRename = (state, action) => {
-    console.log(action)
     const newData = [...state.data]
-    if (action.category.parentId) {
-        const parent = newData.find(c => c.id === action.category.parentId)
-        const cate = parent.children.find(c => c.id === action.category.id)
+    if (action.category.parentCategoryId) {
+        const parent = newData.find(c => c.categoryId === action.category.parentCategoryId)
+        const cate = parent.children.find(c => c.categoryId === action.category.categoryId)
         cate.name = action.category.name
     } else {
-        const cate = newData.find(c => c.id === action.category.id)
+        const cate = newData.find(c => c.categoryId === action.category.categoryId)
         cate.name = action.category.name
     }
     return { ...state, data: newData }

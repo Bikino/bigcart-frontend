@@ -1,15 +1,15 @@
 import axios from 'axios'
-import { getToken } from '../helper/authentication'
+//import { getToken } from '../helper/authentication'
 
 export const getPendingVendorList = async () => {
-    let token = getToken()
+    //let token = getToken()
     let url = `http://localhost:9988/vendor/pending`
     const response = await axios.get(url)
     return response
 }
 
 export const getVendorList = async () => {
-    let token = getToken()
+    //let token = getToken()
     let url = `http://localhost:9988/vendor`
     const response = await axios.get(url)
     return response

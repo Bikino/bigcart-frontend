@@ -18,10 +18,10 @@ const PendingVendorTable = (props) => {
                 {
                     props.data.map((p) => (
                         <tr key={p.id}>
-                            <td>{p.name}</td>
+                            <td>{p.companyName}</td>
                             <td>{p.phone}</td>
                             <td>{p.email}</td>
-                            <td>10/21/2020</td>
+                            <td>{new Date(p.registrationDate).toDateString()}</td>
                             <td>
                                 <CButton size='sm' block color="success" onClick={() => props.approveVendorHandler(p.id)}>Approve</CButton>
                             </td>

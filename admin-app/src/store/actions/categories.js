@@ -22,34 +22,30 @@ export const getCategoryList = () => {
             const response = await categorySvc.getCategoryList()
             const { data } = response
             let categories = []
-
-            // for (let key in data) {
-            //     if (data[key].parentId === '') {
-            //         categories.push({ ...data[key], id: key, parent: '' })
-            //     }
-            //     else {
-            //         categories.push({ ...data[key], id: key, parent: data[data[key].parentId].name })
-            //     }
-            // }
-
-            for (let key in data) {
-                if (data[key].parentId === '') {
-                    categories.push({ ...data[key], id: key })
+            data.forEach(c => {
+                if (!c.parentCategoryId) {
+                    categories.push({
+                        categoryId: c.categoryId,
+                        name: c.name
+                    })
                 }
-            }
+            })
 
-            for (let key in data) {
-                if (data[key].parentId !== '') {
-                    let parent = categories.find(c => c.id === data[key].parentId)
+            data.forEach(c => {
+                if (c.parentCategoryId) {
+                    let parent = categories.find(cate => cate.categoryId === c.parentCategoryId)
 
                     if (!parent.children) {
                         parent.children = []
                     }
 
-                    parent.children.push({ ...data[key], id: key })
+                    parent.children.push({
+                        categoryId: c.categoryId,
+                        name: c.name,
+                        parentCategoryId: c.parentCategoryId
+                    })
                 }
-            }
-
+            })
             dispatch(getCategoryListSuccess(categories))
         }
         catch (err) {
@@ -78,7 +74,11 @@ export const createCategory = (cateName) => {
         try {
             const response = await categorySvc.createCategory(cateName)
             const { data } = response
-            dispatch(createCategorySuccess(data))
+            if (Number.isInteger(data)) {
+                dispatch(createCategorySuccess({ categoryId: data, name: cateName }))
+            } else {
+                dispatch(createCategoryFail(new Error('error occured')))
+            }
         }
         catch (err) {
             dispatch(createCategoryFail(new Error('error occured')))
@@ -106,7 +106,11 @@ export const createSubCategory = (cateName, parentId) => {
         try {
             const response = await categorySvc.createSubCategory(cateName, parentId)
             const { data } = response
-            dispatch(createSubCategorySuccess(data))
+            if (Number.isInteger(data)) {
+                dispatch(createSubCategorySuccess({ categoryId: data, name: cateName, parentCategoryId: parentId }))
+            } else {
+                dispatch(createSubCategoryFail(new Error('error occured')))
+            }
         }
         catch (err) {
             dispatch(createSubCategoryFail(new Error('error occured')))
@@ -128,13 +132,12 @@ const renameCategorySuccess = (category) => ({
     category
 })
 
-export const renameCategory = (newName, category) => {
+export const renameCategory = (newName, categoryId, parentCategoryId) => {
     return async dispatch => {
         dispatch(renameCategoryStart())
         try {
-            const response = await categorySvc.renameCategory(newName, category)
-            const { data } = response
-            dispatch(renameCategorySuccess(data))
+            await categorySvc.renameCategory(newName, categoryId)
+            dispatch(renameCategorySuccess({ name: newName, categoryId, parentCategoryId }))
         }
         catch (err) {
             dispatch(renameCategoryFail(new Error('error occured')))

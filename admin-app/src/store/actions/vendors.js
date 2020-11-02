@@ -21,7 +21,7 @@ export const getPendingVendorList = () => (
         dispatch(getPendingVendorsStart())
         try {
             const response = await vendorSvc.getPendingVendorList()
-            const { data } = response            
+            const { data } = response
             dispatch(getPendingVendorsSuccess(data))
         }
         catch (err) {
@@ -68,19 +68,21 @@ const approveVendorFail = (err) => ({
     err
 })
 
-const approveVendorSuccess = (vendorId) => ({
+const approveVendorSuccess = (vendorId, vendorName) => ({
     type: actionTypes.VENDOR_APPROVE_SUCCESS,
-    vendorId
+    vendorId,
+    vendorName,
 })
 
 export const approveVendor = (id) => {
-    return async dispatch => {
+    return async (dispatch, getState) => {
         dispatch(approveVendorStart())
         try {
-            const response = await vendorSvc.approveVendor(id)
-            const { data } = response
-            const { id: vendorId } = data
-            dispatch(approveVendorSuccess(vendorId))
+            await vendorSvc.approveVendor(id)
+            const state = getState()
+            const { data } = state.vendorReducer.pendingVendors
+            const vendor = data.find(v => v.id === id)
+            dispatch(approveVendorSuccess(id, vendor.companyName))
             dispatch(showAlertSuccess('Vendor has been approved!'))
         }
         catch (err) {
@@ -109,10 +111,8 @@ export const declineVendor = (id) => {
     return async dispatch => {
         dispatch(declineVendorStart())
         try {
-            const response = await vendorSvc.declineVednor(id)
-            const { data } = response
-            const { id: vendorId } = data
-            dispatch(declineVendorSuccess(vendorId))
+            await vendorSvc.declineVendor(id)
+            dispatch(declineVendorSuccess(id))
             dispatch(showAlertSuccess('Vendor has been declined!'))
         }
         catch (err) {
@@ -142,8 +142,10 @@ export const loadVendorForDropDown = () => (
         dispatch(loadVendorForDropDownStart())
         try {
             const response = await vendorSvc.getVendorList()
-            const { data } = response           
-            dispatch(loadVendorForDropDownSuccess(data))
+            const { data } = response
+            const vendors = data.map(v => ({ id: v.id, name: v.companyName }))
+
+            dispatch(loadVendorForDropDownSuccess(vendors))
         }
         catch (err) {
             dispatch(loadVendorForDropDownFail(new Error('error occured')))

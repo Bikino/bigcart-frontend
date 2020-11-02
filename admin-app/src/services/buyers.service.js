@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { getToken } from '../helper/authentication'
+//import { getToken } from '../helper/authentication'
 
 export const getBuyerList = async () => {
-    let token = getToken()
-    let url = `https://burger-udemy-2eecb.firebaseio.com/buyers.json?auth=${token}`
+    //let token = getToken()
+    let url = `http://localhost:9988/buyer`
     const response = await axios.get(url)
     return response
 }

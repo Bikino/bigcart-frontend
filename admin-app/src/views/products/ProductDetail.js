@@ -27,7 +27,7 @@ const ProductDetail = (props) => {
 
     useEffect(() => {
         if (!isLoading && !err && data) {
-            axios.post('http://localhost:8001/product/image', data.imageUrl, {
+            axios.post('http://localhost:8001/product/image', data.vendorProduct.imageUrl, {
                 responseType: 'blob',
                 headers: {
                     'Accept': 'image/jpeg',
@@ -37,7 +37,7 @@ const ProductDetail = (props) => {
                 const imgUrl = window.URL.createObjectURL(new Blob([response.data]));
                 setImageUrl(imgUrl)
             })
-                .catch(err => { })
+                .catch(err => { setImageUrl(noImg) })
         }
     }, [isLoading, err, data])
 
@@ -54,10 +54,12 @@ const ProductDetail = (props) => {
                             </CCardHeader>
                             <CCardBody>
                                 <div>
-                                    <h5>{data.productName} - {data.vendorName}</h5>
-                                    <img ref={imgRef} style={{ width: '100px' }} src={imageUrl} alt='' />
-                                    <h6 className='text-success'>Price: ${data.price}</h6>
-                                    <p className='text-primary'>{data.description}</p>
+                                    <h5>{data.product.name}</h5>
+                                    <img ref={imgRef} style={{ width: '150px' }} src={imageUrl} alt='' />
+                                    <hr />
+                                    <h6 className='text-success'>Price: ${data.vendorProduct.price}</h6>
+                                    <p className='text-primary'>{data.product.description}</p>
+                                    <p className='text-primary'>{data.product.specifications}</p>
                                 </div>
                             </CCardBody>
                         </CCard>

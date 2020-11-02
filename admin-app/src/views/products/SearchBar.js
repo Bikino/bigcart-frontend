@@ -28,7 +28,7 @@ const SearchBar = (props) => {
                 }}>
                     <option>All vendors</option>
                     {
-                        props.vendors.map(c => <option key={c.id} value={c.id}>{c.companyName}</option>)
+                        props.vendors.map(c => <option key={c.id} value={c.id}>{c.name}</option>)
                     }
                 </select>
             </div>

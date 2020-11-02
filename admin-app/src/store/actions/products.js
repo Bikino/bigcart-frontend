@@ -89,7 +89,6 @@ const getProductDetailStart = () => ({
     type: actionTypes.PRODUCTS_GET_DETAIL_START
 })
 
-
 const getProductDetailFail = (err) => ({
     type: actionTypes.PRODUCTS_GET_DETAIL_FAIL,
     err

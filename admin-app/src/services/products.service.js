@@ -51,22 +51,32 @@ export const getProductDetail = async (vendorId, productId) => {
     return response
 }
 
-export const approveProduct = async (id) => {
+export const approveProduct = async (idArray) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 1 }))
+    const response = await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     return response
 }
 
-export const declineProduct = async (id) => {
+export const declineProduct = async (idArray) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 0 }))
+    const response = await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     return response
 }
 
-const fakeApprove = (id) => {
-    return new Promise((resolve) => setTimeout(() => {
-        resolve({ data: true })
-    }, 1000))
-}
+// const fakeApprove = (id) => {
+//     return new Promise((resolve) => setTimeout(() => {
+//         resolve({ data: true })
+//     }, 1000))
+// }

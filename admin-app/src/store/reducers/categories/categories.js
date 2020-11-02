@@ -24,9 +24,36 @@ const categories = (state = initialState, action) => {
         /* category renamed*/
         case actionTypes.CATEGORIES_RENAME_SUCCESS:
             return categoryRename(state, action)
+        case actionTypes.CATEGORIES_DELETE_SUCCESS:
+            return deleteCategory(state, action)
         default:
             return state
     }
+}
+
+const deleteCategory = (state, action) => {
+    const newData = [...state.data]
+    let theIndex = newData.findIndex(c => c.categoryId === action.categoryId)
+    if (theIndex > -1) {
+        newData.splice(theIndex, 1)
+    }
+    else {
+        const parents = newData.filter(p => p.children)
+        let parent = null
+        let theIndex = -1
+        parents.forEach(p => {                        
+            let tempIndex = p.children.findIndex(c => c.categoryId === action.categoryId)
+            if (tempIndex > -1) {
+                parent = p
+                theIndex = tempIndex
+            }
+        })
+
+        if (parent) {
+            parent.children.splice(theIndex, 1)
+        }
+    }
+    return { ...state, data: newData }
 }
 
 const subCategoryCreate = (state, action) => {

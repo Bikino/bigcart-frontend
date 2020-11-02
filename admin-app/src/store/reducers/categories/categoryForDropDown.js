@@ -23,9 +23,20 @@ const categoryForDropDown = (state = initialState, action) => {
         /* category renamed*/
         case actionTypes.CATEGORIES_RENAME_SUCCESS:
             return categoryRename(state, action)
+        case actionTypes.CATEGORIES_DELETE_SUCCESS:
+            return categoryDelete(state, action)
         default:
             return state
     }
+}
+
+const categoryDelete = (state, action) => {
+    const newData = [...state.data]
+    const theIndex = newData.findIndex(c => c.categoryId === action.categoryId)
+    if (theIndex > -1) {
+        newData.splice(theIndex, 1)
+    }
+    return { ...state, data: newData }
 }
 
 const categoryRename = (state, action) => {

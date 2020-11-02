@@ -60,6 +60,10 @@ const CategoryList = () => {
         dispatch(actions.renameCategory(cateNewName, currentId, parentCateId))
     }
 
+    const deleteCategory = (categoryId) => {
+        dispatch(actions.deleteCategory(categoryId))
+    }
+
     useEffect(() => {
         dispatch(actions.getCategoryList())
     }, [dispatch])
@@ -68,6 +72,7 @@ const CategoryList = () => {
     if (!isLoading && !err & data.length !== 0) {
         categoryTable = <CategoryTable data={data}
             addSubCate={addSubCateClick}
+            deleteCategory={deleteCategory}
             renameCategory={renameCategoryClick} />
     }
 

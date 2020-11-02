@@ -35,7 +35,7 @@ const TheContent = () => {
         title: successTitle,
         showConfirmButton: false,
         timer: 2000,
-        onClose: () => {
+        willClose: () => {
           dispatch(actions.hideAlertSuccess())
         }
       })
@@ -50,7 +50,7 @@ const TheContent = () => {
         title: errorTitle,
         showConfirmButton: false,
         timer: 2000,
-        onClose: () => {
+        willClose: () => {
           dispatch(actions.hideAlertError())
         }
       })

@@ -35,6 +35,7 @@ const Login = (props) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
+    //console.log(formValid)
     if (!formValid)
       return
     dispatch(actions.getToken(username, password))
@@ -64,12 +65,12 @@ const Login = (props) => {
   const checkValidity = (value, inputType) => {
     let valid = true
     if (inputType === 'username') {
-      valid = valid && value.trim() !== '' && value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+      valid = valid && value.trim() // !== '' && value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
 
       if (usernameTouched && !valid) {
         let message = ''
         message = value.trim() === '' ? 'Username cannot be blank' : message
-        message = value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) ? message : 'Please input a valid email'
+        //message = value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) ? message : 'Please input a valid email'
 
         setUsernameErrorData({ message, hasError: true })
       }
@@ -77,9 +78,9 @@ const Login = (props) => {
         setUsernameErrorData({ hasError: false })
 
     } else {
-      valid = valid && value.length >= 6
+      valid = valid && value.length >= 3
       if (passwordTouched && !valid)
-        setpasswordErrorData({ message: 'Minumum password length must be 6', hasError: true })
+        setpasswordErrorData({ message: 'Minumum password length must be 3', hasError: true })
       else
         setpasswordErrorData({ hasError: false })
     }
@@ -125,27 +126,12 @@ const Login = (props) => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4" type="submit">Login</CButton>
-                      </CCol>
-                      <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
+                        <CButton color="primary" className="px-4" type="submit">Sign in</CButton>
                       </CCol>
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              {/* <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
-                <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
-                  </div>
-                </CCardBody>
-              </CCard> */}
             </CCardGroup>
           </CCol>
         </CRow>

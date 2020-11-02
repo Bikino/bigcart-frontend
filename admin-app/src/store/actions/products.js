@@ -17,18 +17,24 @@ const getNewProductsSuccess = (products) => ({
     products
 })
 
-export const getNewProducts = () => {
+export const getNewProducts = (categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getNewProductsStart())
         try {
-            const response = await productSvc.getPendingProducts()
+            const response = await productSvc.getPendingProducts(categoryId, vendorId, productName)
             const products = []
-            for (let key in response.data) {
+            response.data.forEach(p => {
                 products.push({
-                    ...response.data[key],
-                    id: key
+                    vendorProductId: p.vendorProductId,
+                    categoryId: p.categoryId,
+                    categoryName: p.categoryName,
+                    vendorId: p.vendorId,
+                    vendorName: p.vendorName,
+                    productName: p.productName,
+                    price: p.price,
+                    requestDate: p.requestDate,
                 })
-            }
+            })
             dispatch(getNewProductsSuccess(products))
         }
         catch (err) {
@@ -52,18 +58,24 @@ const getProductListSuccess = (products) => ({
     products
 })
 
-export const getProductList = () => {
+export const getProductList = (categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getProductListStart())
         try {
-            const response = await productSvc.getProducts()
+            const response = await productSvc.getProducts(categoryId, vendorId, productName)
             const products = []
-            for (let key in response.data) {
+            response.data.forEach(p => {
                 products.push({
-                    ...response.data[key],
-                    id: key
+                    vendorProductId: p.vendorProductId,
+                    categoryId: p.categoryId,
+                    vendorId: p.vendorId,
+                    categoryName: p.categoryName,
+                    vendorName: p.vendorName,
+                    productName: p.productName,
+                    price: p.price,
+                    requestDate: p.requestDate,
                 })
-            }
+            })
             dispatch(getProductListSuccess(products))
         }
         catch (err) {
@@ -88,16 +100,13 @@ const getProductDetailSuccess = (product) => ({
     product
 })
 
-export const getProductDetail = (id) => {
+export const getProductDetail = (productId, vendorId) => {
     return async dispatch => {
         dispatch(getProductDetailStart())
         try {
-            const response = await productSvc.getProductDetail(id)
+            const response = await productSvc.getProductDetail(productId, vendorId)
             const { data } = response
-            let product = null
-            //mock
-            product = data[id]
-            dispatch(getProductDetailSuccess(product))
+            dispatch(getProductDetailSuccess(data))
         }
         catch (err) {
             dispatch(getProductDetailFail(new Error('error occured')))
@@ -126,9 +135,14 @@ export const approveProduct = (id) => {
         try {
             const response = await productSvc.approveProduct(id)
             const { data } = response
-            const { id: productId } = data
-            dispatch(approveProductSuccess(productId))
-            dispatch(showAlertSuccess('Product has been approved!'))
+            if (data === true) {
+                dispatch(approveProductSuccess(id))
+                dispatch(showAlertSuccess('Products has been approved!'))
+            }
+            else {
+                dispatch(approveProductFail(new Error('error occured')))
+                dispatch(showAlertError('Error occured'))
+            }
         }
         catch (err) {
             dispatch(approveProductFail(new Error('error occured')))

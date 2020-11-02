@@ -26,9 +26,11 @@ const pendingProducts = (state = initialState, action) => {
 
 const removeProductFromList = (state, action) => {
     const newData = [...state.data]
-    const product = newData.find(p => p.id === action.productId)
-    const index = newData.indexOf(product)
-    newData.splice(index, 1)
+    action.productId.forEach(id => {
+        const product = newData.find(p => p.vendorProductId === id)
+        const index = newData.indexOf(product)
+        newData.splice(index, 1)
+    })
     return { ...state, data: newData }
 
 }

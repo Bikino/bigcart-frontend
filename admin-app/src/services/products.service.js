@@ -44,9 +44,9 @@ export const getProducts = async (categoryId, vendorId, productName) => {
     return response
 }
 
-export const getProductDetail = async (productId, vendorId) => {
+export const getProductDetail = async (vendorId, productId) => {
     //let token = getToken()
-    let url = `http://localhost:8001/productvendors/${productId}/${vendorId}`
+    let url = `http://localhost:8001/vendorproduct/${vendorId}/${productId}`
     const response = await axios.get(url)
     return response
 }

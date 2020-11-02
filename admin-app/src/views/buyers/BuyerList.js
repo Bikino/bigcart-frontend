@@ -25,7 +25,7 @@ const BuyerList = (props) => {
                 <CCol xl='12' md='12'>
                     <CCard>
                         <CCardHeader>
-                            <h5>Vendor List</h5>
+                            <h5>Buyer List</h5>
                         </CCardHeader>
                         <CCardBody>
                             {buyerTable}

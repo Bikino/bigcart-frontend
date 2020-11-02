@@ -20,12 +20,8 @@ export const getBuyerList = () => (
         dispatch(getBuyersStart())
         try {
             const response = await buyerSvc.getBuyerList()
-            const { data } = response
-            let buyers = []
-            for (let key in data) {
-                buyers.push({ ...data[key], id: key })
-            }
-            dispatch(getBuyersSuccess(buyers))
+            const { data } = response            
+            dispatch(getBuyersSuccess(data))
         }
         catch (err) {
             dispatch(getBuyersFail(new Error('error occured')))

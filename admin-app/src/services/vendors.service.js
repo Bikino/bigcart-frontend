@@ -17,20 +17,28 @@ export const getVendorList = async () => {
 
 export const approveVendor = async (id) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:9988/vendor/status/${id}`
+    const response = await axios.put(url, true, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     return response
 }
 
-export const declineVednor = async (id) => {
+export const declineVendor = async (id) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:9988/vendor/status/${id}`
+    const response = await axios.put(url, 'false', {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
     return response
 }
 
-const fakeApprove = (id) => {
-    return new Promise((resolve, reject) => setTimeout(() => {
-        resolve({ data: { id } })
-    }, 1000))
-}
+// const fakeApprove = (id) => {
+//     return new Promise((resolve, reject) => setTimeout(() => {
+//         resolve({ data: { id } })
+//     }, 1000))
+// }

@@ -10,7 +10,6 @@ const BuyerTable = (props) => {
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Date of Birth</th>
                     <th>Registration Date</th>
                 </tr>
             </thead>
@@ -22,8 +21,7 @@ const BuyerTable = (props) => {
                             <td>{p.lastName}</td>
                             <td>{p.email}</td>
                             <td>{p.phone}</td>
-                            <td>{p.dob}</td>
-                            <td>10/21/2020</td>
+                            <td>{new Date(p.dateOfBirth).toDateString()}</td>
                         </tr>
                     ))
                 }

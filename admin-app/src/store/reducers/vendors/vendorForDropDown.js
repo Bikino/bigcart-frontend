@@ -14,6 +14,10 @@ const vendorForDropDown = (state = initialState, action) => {
             return { ...state, isLoading: false, data: action.vendors, err: null }
         case actionTypes.VENDOR_LOAD_FOR_DROPDOWN_FAIL:
             return { ...state, isLoading: false, err: action.err }
+        case actionTypes.VENDOR_APPROVE_SUCCESS:
+            const newData = [...state.data]
+            newData.push({ id: action.vendorId, name: action.vendorName })
+            return { ...state, data: newData }
         default:
             return state
     }

@@ -23,10 +23,10 @@ export const getPendingProducts = async (categoryId, vendorId, productName) => {
     return response
 }
 
-export const getProducts = async (categoryId, vendorId, productName) => {
+export const getProducts = async (status, categoryId, vendorId, productName) => {
     //let token = getToken()
     const theUrl = new URL('http://localhost:8001/vendorproduct/findProductForAdminDTO')
-    theUrl.searchParams.append('status', 'approved')
+    theUrl.searchParams.append('status', status)
     if (categoryId && categoryId > 0) {
         theUrl.searchParams.append('categoryId', categoryId)
     }

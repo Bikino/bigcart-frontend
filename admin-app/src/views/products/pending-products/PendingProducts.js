@@ -55,7 +55,7 @@ const PendingProducts = (props) => {
                             <h5 style={{ display: 'inline-block' }}>Pending products</h5>
                             <div className="card-header-actions">
                                 <CButton color="success" disabled={productIdArray.length === 0}
-                                    onClick={() => approveProducts()} style={{ marginRight: '5px' }}>Accept</CButton>
+                                    onClick={() => approveProducts()} style={{ marginRight: '5px' }}>Approve</CButton>
                                 <CButton color="danger" disabled={productIdArray.length === 0}
                                     onClick={() => declineProducts()}>Decline</CButton>
                             </div>

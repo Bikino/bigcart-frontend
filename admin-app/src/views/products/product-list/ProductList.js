@@ -15,12 +15,12 @@ const ProductList = (props) => {
     const { data: categories } = useSelector(state => state.categoryReducer.categoryForDropDown)
     const { data: vendors } = useSelector(state => state.vendorReducer.vendorForDropDown)
 
-    const searchProducts = (categoryId, vendorId, productName) => {
-        dispatch(actions.getProductList(categoryId, vendorId, productName))
+    const searchProducts = (status, categoryId, vendorId, productName) => {
+        dispatch(actions.getProductList(status, categoryId, vendorId, productName))
     }
 
     useEffect(() => {
-        dispatch(actions.getProductList())
+        dispatch(actions.getProductList('approved'))
     }, [dispatch])
 
     let productTable = null
@@ -41,7 +41,7 @@ const ProductList = (props) => {
                             <h5>Product List</h5>
                         </CCardHeader>
                         <CCardBody>
-                            <SearchBar vendors={vendors} categories={categories} searchProducts={searchProducts} />
+                            <SearchBar vendors={vendors} categories={categories} searchProducts={searchProducts} showStatusDropdown />
                             {productTable}
                         </CCardBody>
                     </CCard>

@@ -58,11 +58,11 @@ const getProductListSuccess = (products) => ({
     products
 })
 
-export const getProductList = (categoryId = 0, vendorId = 0, productName = '') => {
+export const getProductList = (status, categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getProductListStart())
         try {
-            const response = await productSvc.getProducts(categoryId, vendorId, productName)
+            const response = await productSvc.getProducts(status, categoryId, vendorId, productName)
             const products = []
             response.data.forEach(p => {
                 products.push({

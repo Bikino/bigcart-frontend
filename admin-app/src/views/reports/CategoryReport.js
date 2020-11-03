@@ -10,7 +10,7 @@ const CategoryReport = () => {
     const { isLoading, data, err } = useSelector(state => state.categoryReducer.categoryForDropDown)
 
     const getReport = (categoryId) => {
-        axios.get('http://localhost:81/sample.pdf', {
+        axios.get(`http://localhost:7777/order/vendor/${categoryId}`, {
             responseType: 'blob'
         })
             .then(response => {
@@ -23,13 +23,13 @@ const CategoryReport = () => {
     let options = null
     if (!isLoading && !err && data.length > 0) {
         options = data.map(v => (
-            <option key={v.id} value={v.id}>{v.name}</option>
+            <option key={v.categoryId} value={v.categoryId}>{v.name}</option>
         ))
     }
 
     useEffect(() => {
         if (!isLoading && !err && data.length > 0) {
-            setSeletedId(data[0].id)
+            setSeletedId(data[0].categoryId)
         }
     }, [isLoading, err, data])
 

@@ -25,9 +25,11 @@ export const getToken = (username, password) => {
         dispatch(getTokenStart)
         try {
             let response = await authSvc(username, password)
-            let { idToken, expiresIn } = response.data
-            saveToken(idToken)
-            dispatch(getTokenSuccess(idToken, expiresIn))
+            let { access_token, expires_in } = response.data
+            if (!access_token)
+                access_token = 'fake_token'
+            saveToken(access_token)
+            dispatch(getTokenSuccess(access_token, expires_in))
             dispatch(loadVendorForDropDown())
             dispatch(loadCategoryForDropDown())
             history.push('/')

@@ -8,7 +8,7 @@ const VendorReport = () => {
     const [seletedId, setSeletedId] = useState('')
 
     const getReport = (seletedId) => {
-        axios.get(`http://localhost:7777/order/vendor/${seletedId}`, {
+        axios.get(`${process.env.REACT_APP_REPORT_API}/order/vendor/${seletedId}`, {
             responseType: 'blob'
         })
             .then(response => {

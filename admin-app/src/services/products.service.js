@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getPendingProducts = async (categoryId, vendorId, productName) => {
     //let token = getToken()
-    const theUrl = new URL('http://localhost:8001/vendorproduct/findProductForAdminDTO')
+    const theUrl = new URL(`${process.env.REACT_APP_PRODUCT_API}/vendorproduct/findProductForAdminDTO`)
     theUrl.searchParams.append('status', 'pending')
 
     if (categoryId && categoryId > 0) {
@@ -25,7 +25,7 @@ export const getPendingProducts = async (categoryId, vendorId, productName) => {
 
 export const getProducts = async (status, categoryId, vendorId, productName) => {
     //let token = getToken()
-    const theUrl = new URL('http://localhost:8001/vendorproduct/findProductForAdminDTO')
+    const theUrl = new URL(`${process.env.REACT_APP_PRODUCT_API}/vendorproduct/findProductForAdminDTO`)
     theUrl.searchParams.append('status', status)
     if (categoryId && categoryId > 0) {
         theUrl.searchParams.append('categoryId', categoryId)
@@ -46,14 +46,14 @@ export const getProducts = async (status, categoryId, vendorId, productName) => 
 
 export const getProductDetail = async (vendorId, productId) => {
     //let token = getToken()
-    let url = `http://localhost:8001/vendorproduct/findFullProductById/${vendorId}-${productId}`
+    let url = `${process.env.REACT_APP_PRODUCT_API}/vendorproduct/findFullProductById/${vendorId}-${productId}`
     const response = await axios.get(url)
     return response
 }
 
 export const approveProduct = async (idArray) => {
     //let token = getToken()
-    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    let url = `${process.env.REACT_APP_PRODUCT_API}/vendorproduct/approveProduct`
     const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 1 }))
     const response = await axios.post(url, data, {
         headers: {
@@ -65,7 +65,7 @@ export const approveProduct = async (idArray) => {
 
 export const declineProduct = async (idArray) => {
     //let token = getToken()
-    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    let url = `${process.env.REACT_APP_PRODUCT_API}/vendorproduct/approveProduct`
     const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 0 }))
     const response = await axios.post(url, data, {
         headers: {

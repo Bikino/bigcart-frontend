@@ -9,7 +9,7 @@ const PendingProductTable = (props) => {
         history.push(`/products/${productId}`)
     }
 
-    const checkBoxClick = (event, vendorProductId) => {        
+    const checkBoxClick = (event, vendorProductId) => {
         const checked = event.target.checked
         if (checked) {
             props.setProductIdArray(prevState => {
@@ -29,7 +29,7 @@ const PendingProductTable = (props) => {
         <table className='table'>
             <thead>
                 <tr>
-                    <th><input type="checkbox" /></th>
+                    <th></th>
                     <th>Category</th>
                     <th>Vendor</th>
                     <th>Name</th>

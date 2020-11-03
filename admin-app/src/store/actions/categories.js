@@ -172,3 +172,35 @@ export const loadCategoryForDropDown = () => (
         }
     }
 )
+
+const deleteCategoryStart = () => ({
+    type: actionTypes.CATEGORIES_DELETE_START
+})
+
+const deleteCategoryFail = (err) => ({
+    type: actionTypes.CATEGORIES_DELETE_FAIL,
+    err,
+})
+
+const deleteCategorySuccess = (categoryId) => ({
+    type: actionTypes.CATEGORIES_DELETE_SUCCESS,
+    categoryId
+})
+
+export const deleteCategory = (categoryId) => (
+    async dispatch => {
+        dispatch(deleteCategoryStart())
+        try {
+            const response = await categorySvc.deleteCategory(categoryId)
+            const { data } = response
+            if (data === 'Category is deleted.') {
+                dispatch(deleteCategorySuccess(categoryId))
+            } else {
+                dispatch(deleteCategoryFail(new Error('error occured')))
+            }
+        }
+        catch (err) {
+            dispatch(deleteCategoryFail(new Error('error occured')))
+        }
+    }
+)

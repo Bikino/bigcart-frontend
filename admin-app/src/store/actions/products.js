@@ -58,11 +58,11 @@ const getProductListSuccess = (products) => ({
     products
 })
 
-export const getProductList = (categoryId = 0, vendorId = 0, productName = '') => {
+export const getProductList = (status, categoryId = 0, vendorId = 0, productName = '') => {
     return async dispatch => {
         dispatch(getProductListStart())
         try {
-            const response = await productSvc.getProducts(categoryId, vendorId, productName)
+            const response = await productSvc.getProducts(status, categoryId, vendorId, productName)
             const products = []
             response.data.forEach(p => {
                 products.push({
@@ -123,19 +123,19 @@ const approveProductFail = (err) => ({
     err
 })
 
-const approveProductSuccess = (productId) => ({
+const approveProductSuccess = (productIdArray) => ({
     type: actionTypes.PRODUCTS_APPROVE_SUCCESS,
-    productId
+    productIdArray
 })
 
-export const approveProduct = (id) => {
+export const approveProduct = (idArray) => {
     return async dispatch => {
         dispatch(approveProductStart())
         try {
-            const response = await productSvc.approveProduct(id)
+            const response = await productSvc.approveProduct(idArray)
             const { data } = response
-            if (data === true) {
-                dispatch(approveProductSuccess(id))
+            if (data === 'ok') {
+                dispatch(approveProductSuccess(idArray))
                 dispatch(showAlertSuccess('Products has been approved!'))
             }
             else {
@@ -160,20 +160,24 @@ const declineProductFail = (err) => ({
     err
 })
 
-const declineProductSuccess = (productId) => ({
+const declineProductSuccess = (productIdArray) => ({
     type: actionTypes.PRODUCTS_DECLINE_SUCCESS,
-    productId
+    productIdArray
 })
 
-export const declineProduct = (id) => {
+export const declineProduct = (idArray) => {
     return async dispatch => {
         dispatch(declineProductStart())
         try {
-            const response = await productSvc.declineProduct(id)
+            const response = await productSvc.declineProduct(idArray)
             const { data } = response
-            const { id: productId } = data
-            dispatch(declineProductSuccess(productId))
-            dispatch(showAlertSuccess('Product has been declined!'))
+            if (data === 'ok') {
+                dispatch(declineProductSuccess(idArray))
+                dispatch(showAlertSuccess('Product has been declined!'))
+            } else {
+                dispatch(declineProductFail(new Error('error occured')))
+                dispatch(showAlertError('Error occured'))
+            }
         }
         catch (err) {
             dispatch(declineProductFail(new Error('error occured')))

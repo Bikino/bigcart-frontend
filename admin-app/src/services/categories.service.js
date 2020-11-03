@@ -21,7 +21,13 @@ export const createSubCategory = async (cateName, parentId) => {
 }
 
 export const renameCategory = async (newName, categoryId) => {
-    let url = 'http://localhost:8001/category/'    
+    let url = 'http://localhost:8001/category/'
     const response = await axios.patch(url, { name: newName, categoryId: categoryId })
+    return response
+}
+
+export const deleteCategory = async (categoryId) => {
+    let url = `http://localhost:8001/category/${categoryId}`
+    const response = await axios.delete(url)
     return response
 }

@@ -23,10 +23,10 @@ export const getPendingProducts = async (categoryId, vendorId, productName) => {
     return response
 }
 
-export const getProducts = async (categoryId, vendorId, productName) => {
+export const getProducts = async (status, categoryId, vendorId, productName) => {
     //let token = getToken()
     const theUrl = new URL('http://localhost:8001/vendorproduct/findProductForAdminDTO')
-    theUrl.searchParams.append('status', 'approved')
+    theUrl.searchParams.append('status', status)
     if (categoryId && categoryId > 0) {
         theUrl.searchParams.append('categoryId', categoryId)
     }
@@ -51,22 +51,32 @@ export const getProductDetail = async (vendorId, productId) => {
     return response
 }
 
-export const approveProduct = async (id) => {
+export const approveProduct = async (idArray) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 1 }))
+    const response = await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     return response
 }
 
-export const declineProduct = async (id) => {
+export const declineProduct = async (idArray) => {
     //let token = getToken()
-    //let url = `https://burger-udemy-2eecb.firebaseio.com/products.json?auth=${token}`
-    const response = await fakeApprove(id)
+    let url = `http://localhost:8001/vendorproduct/approveProduct`
+    const data = idArray.map(id => ({ vendorProductId: id, approvalCode: 0 }))
+    const response = await axios.post(url, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
     return response
 }
 
-const fakeApprove = (id) => {
-    return new Promise((resolve) => setTimeout(() => {
-        resolve({ data: true })
-    }, 1000))
-}
+// const fakeApprove = (id) => {
+//     return new Promise((resolve) => setTimeout(() => {
+//         resolve({ data: true })
+//     }, 1000))
+// }

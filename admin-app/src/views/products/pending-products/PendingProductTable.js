@@ -9,8 +9,7 @@ const PendingProductTable = (props) => {
         history.push(`/products/${productId}`)
     }
 
-    const checkBoxClick = (event) => {
-        const vendorProductId = event.target.getAttribute('vendorProductId')
+    const checkBoxClick = (event, vendorProductId) => {        
         const checked = event.target.checked
         if (checked) {
             props.setProductIdArray(prevState => {
@@ -43,7 +42,7 @@ const PendingProductTable = (props) => {
                 {
                     props.data.map((p) => (
                         <tr key={p.vendorProductId}>
-                            <td><input type="checkbox" vendorproductid={p.vendorProductId} onClick={(evt) => checkBoxClick(evt)} /></td>
+                            <td><input type="checkbox" onClick={(evt) => checkBoxClick(evt, p.vendorProductId)} /></td>
                             <td>{p.categoryName}</td>
                             <td>{p.vendorName}</td>
                             <td>{p.productName}</td>

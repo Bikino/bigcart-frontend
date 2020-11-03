@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const getBuyerList = async () => {
     //let token = getToken()
-    let url = `http://localhost:9988/buyer`
+    let url = `${process.env.REACT_APP_USER_API}/buyer`
     const response = await axios.get(url)
     return response
 }

@@ -11,6 +11,9 @@ const persistConfig = {
     blacklist: ['token', 'alertReducer']
 }
 
+const isFunction = (functionToCheck) => (functionToCheck && {}.toString.call(functionToCheck) === '[object Function]')
+
+
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
 
 const middleware = [thunkMiddleware]
@@ -19,5 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-export const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(...middleware)))
+//export const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(...middleware)))
+export const store = isFunction(composeEnhancers) ? createStore(persistedReducer, composeEnhancers(applyMiddleware(...middleware)))
+    : createStore(persistedReducer, applyMiddleware(...middleware))
 export const persistor = persistStore(store)

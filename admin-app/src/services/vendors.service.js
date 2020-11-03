@@ -3,21 +3,21 @@ import axios from 'axios'
 
 export const getPendingVendorList = async () => {
     //let token = getToken()
-    let url = `http://localhost:9988/vendor/pending`
+    let url = `${process.env.REACT_APP_USER_API}/vendor/pending`
     const response = await axios.get(url)
     return response
 }
 
 export const getVendorList = async () => {
     //let token = getToken()
-    let url = `http://localhost:9988/vendor`
+    let url = `${process.env.REACT_APP_USER_API}/vendor`
     const response = await axios.get(url)
     return response
 }
 
 export const approveVendor = async (id) => {
     //let token = getToken()
-    let url = `http://localhost:9988/vendor/status/${id}`
+    let url = `${process.env.REACT_APP_USER_API}/vendor/status/${id}`
     const response = await axios.put(url, true, {
         headers: {
             "Content-Type": "application/json"
@@ -28,7 +28,7 @@ export const approveVendor = async (id) => {
 
 export const declineVendor = async (id) => {
     //let token = getToken()
-    let url = `http://localhost:9988/vendor/status/${id}`
+    let url = `${process.env.REACT_APP_USER_API}/vendor/status/${id}`
     const response = await axios.put(url, 'false', {
         headers: {
             "Content-Type": "application/json"

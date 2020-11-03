@@ -10,7 +10,7 @@ const CategoryReport = () => {
     const { isLoading, data, err } = useSelector(state => state.categoryReducer.categoryForDropDown)
 
     const getReport = (categoryId) => {
-        axios.get(`http://localhost:7777/order/vendor/${categoryId}`, {
+        axios.get(`${process.env.REACT_APP_REPORT_API}/order/vendor/${categoryId}`, {
             responseType: 'blob'
         })
             .then(response => {

@@ -14,7 +14,6 @@ const ProductDetail = (props) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log(id.split('-'))
         const vendorId = id.split('-')[0]
         const productId = id.split('-')[1]
         dispatch(actions.getProductDetail(vendorId, productId))

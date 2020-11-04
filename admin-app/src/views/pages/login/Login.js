@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   CButton,
   CCard,
@@ -15,10 +15,13 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import Swal from 'sweetalert2/dist/sweetalert2'
+
+import 'sweetalert2/src/sweetalert2.scss'
 
 import * as actions from '../../../store/actions'
 
-const Login = (props) => {
+const Login = () => {
 
   const [username, setUsername] = useState('')
   const [usernameTouched, setUsernameTouched] = useState(false)
@@ -27,19 +30,31 @@ const Login = (props) => {
   const [password, setPassword] = useState('')
   const [passwordTouched, setPasswordTouched] = useState(false)
   const [passwordErrorData, setpasswordErrorData] = useState({ hasError: false, message: '' })
-
   const [formValid, setFormValid] = useState(false)
+
+  const { isLoading, err } = useSelector(state => state.token)
 
 
   const dispatch = useDispatch()
 
   const handleSubmit = (evt) => {
     evt.preventDefault()
-    //console.log(formValid)
     if (!formValid)
       return
     dispatch(actions.getToken(username, password))
   }
+
+  useEffect(() => {
+    if (!isLoading && err) {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Invalid username or password',
+        showConfirmButton: false,
+        timer: 2000,
+      })
+    }
+  }, [isLoading, err])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -65,12 +80,11 @@ const Login = (props) => {
   const checkValidity = (value, inputType) => {
     let valid = true
     if (inputType === 'username') {
-      valid = valid && value.trim() // !== '' && value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
+      valid = valid && value.trim()
 
       if (usernameTouched && !valid) {
         let message = ''
         message = value.trim() === '' ? 'Username cannot be blank' : message
-        //message = value.trim().match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) ? message : 'Please input a valid email'
 
         setUsernameErrorData({ message, hasError: true })
       }

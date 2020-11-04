@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import * as categorySvc from '../../services/categories.service'
+import { showAlertError } from './alert'
 
 const getCategoryListStart = () => ({
     type: actionTypes.CATEGORIES_GET_LIST_START
@@ -196,10 +197,12 @@ export const deleteCategory = (categoryId) => (
             if (data === 'Category is deleted.') {
                 dispatch(deleteCategorySuccess(categoryId))
             } else {
+                dispatch(showAlertError('Category could not be deleted'))
                 dispatch(deleteCategoryFail(new Error('error occured')))
             }
         }
         catch (err) {
+            dispatch(showAlertError('Category could not be deleted'))
             dispatch(deleteCategoryFail(new Error('error occured')))
         }
     }

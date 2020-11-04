@@ -6,7 +6,7 @@ const SubCateGoryList = (props) => {
         <div style={{ margin: '15px' }}>
             <ul className='list-group'>
                 {
-                    props.data ? props.data.map(c => (
+                    (props.data && props.data.length > 0) ? props.data.map(c => (
                         <li className='list-group-item' key={c.categoryId}>
                             {c.name}
                             <div className='float-right'>

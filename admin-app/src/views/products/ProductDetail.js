@@ -26,7 +26,7 @@ const ProductDetail = (props) => {
 
     useEffect(() => {
         if (!isLoading && !err && data) {
-            axios.post('http://localhost:8001/product/image', data.vendorProduct.imageUrl, {
+            axios.post(`${process.env.REACT_APP_PRODUCT_API}/product/image`, data.vendorProduct.imageUrl, {
                 responseType: 'blob',
                 headers: {
                     'Accept': 'image/jpeg',

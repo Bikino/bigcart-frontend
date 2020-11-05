@@ -22,7 +22,7 @@ const PendingProducts = (props) => {
         setProductIdArray([])
     }, [products])
 
-    const searchProducts = (categoryId, vendorId, productName) => {
+    const searchProducts = (status, categoryId, vendorId, productName) => {
         dispatch(actions.getNewProducts(categoryId, vendorId, productName))
     }
 
